@@ -15,6 +15,17 @@ public class ConexaoFactory {
 		Connection conexao = DriverManager.getConnection(URL,USUARIO,SENHA);
 		return conexao;
 	}
+
 	
+	//Verificar a conexão com o banco de dados
+	/*public static void main(String[] args) {
+		try {
+			Connection conexao = ConexaoFactory.conectar();
+			System.out.println("Conexão realizado com sucesso!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erro de conexão");
+		}
+	}*/
 	
 }
