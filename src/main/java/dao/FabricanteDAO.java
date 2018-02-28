@@ -14,9 +14,9 @@ public class FabricanteDAO {
 		sql.append("INSERT INTO fabricante ");
 		sql.append("(Nome,CNPJ,Tel,Endereco,Numero,Cidade,Complemento,Bairro,Cep,UF,Obs,Site)");
 		sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-		
+
 		Connection conexao = ConexaoFactory.conectar();
-		
+
 		PreparedStatement pst =  conexao.prepareStatement(sql.toString());
 		pst.setString(1, f.getNome());
 		pst.setString(2, f.getCnpj());
@@ -30,12 +30,27 @@ public class FabricanteDAO {
 		pst.setString(10, f.getUf());
 		pst.setString(11, f.getObs());
 		pst.setString(12, f.getSite());
+
+		pst.executeUpdate();
+
+	}
+
+	public void deletar(Fabricante f) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append("DELETE FROM fabricante ");
+		sql.append("WHERE idFABRI = ? ");
+		
+		Connection conexao = ConexaoFactory.conectar();
+		
+		PreparedStatement pst = conexao.prepareStatement(sql.toString());
+		pst.setInt(1, f.getIdFABRI());
 		
 		pst.executeUpdate();
-		
 	}
-	
-	public static void main(String[] args) {
+
+
+
+/*		public static void main(String[] args) {
 		Fabricante f1 = new Fabricante();
 		f1.setNome("Leonildo");
 		f1.setCnpj("2312342");
@@ -49,22 +64,38 @@ public class FabricanteDAO {
 		f1.setUf("lala");
 		f1.setObs("teste 123");
 		f1.setSite("www.teste.com.br");
-		
+
 		FabricanteDAO fdao = new FabricanteDAO();
-		
+
 		try {
 			fdao.incluir(f1);
 			System.out.println("Registro incluido com sucesso");
 		} catch (SQLException e) {
 			System.out.println("Erro ao incluir");
 			e.printStackTrace();
-		}
-		
-		
-		
-		
-		
-	}
-	
-	
+			
+			//Teste para excluir fabricante
+			Fabricante f1 = new Fabricante();
+			f1.setIdFABRI(1);
+			
+			FabricanteDAO fdao = new FabricanteDAO();
+
+			try {
+				fdao.deletar(f1);
+				System.out.println("Registro excluido com sucesso");
+			} catch (SQLException e) {
+				System.out.println("Erro ao excluir");
+				e.printStackTrace();
+			}	
+			
+		}*/
+
+
+
+
+
+
+
+
+
 }

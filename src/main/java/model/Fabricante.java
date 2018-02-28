@@ -2,6 +2,7 @@ package model;
 
 public class Fabricante {
 
+	private int idFABRI;
 	private String nome;
 	private String cnpj;
 	private int tel;
@@ -15,8 +16,17 @@ public class Fabricante {
 	private String email;
 	private String obs;
 	private String site;
-	
-	
+
+
+	public int getIdFABRI() {
+		return idFABRI;
+	}
+
+
+	public void setIdFABRI(int idFABRI) {
+		this.idFABRI = idFABRI;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -95,8 +105,8 @@ public class Fabricante {
 	public void setSite(String site) {
 		this.site = site;
 	}
-	
-	
-	
-	
+
+
+
+
 }
