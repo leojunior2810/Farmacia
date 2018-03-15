@@ -107,6 +107,15 @@ public class Fabricante {
 	}
 
 
+	@Override
+	public String toString() {
+		String saida = idFABRI + "-" + nome + "-" + cnpj + "-" + tel + "-" + endereco + "-" + "-" + numero + "-" +
+		cidade + "-" + complemento + "-" + bairro + "-" + cep + "-" + uf + "-" + email + "-" + obs + "-" + site;		
+		return saida;
 
+	}
+
+
+	
 
 }

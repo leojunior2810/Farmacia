@@ -2,7 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import factory.ConexaoFactory;
 import model.Fabricante;
@@ -41,25 +43,25 @@ public class FabricanteDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append("DELETE FROM fabricante ");
 		sql.append("WHERE idFABRI = ? ");
-		
+
 		Connection conexao = ConexaoFactory.conectar();
-		
+
 		PreparedStatement pst = conexao.prepareStatement(sql.toString());
 		pst.setInt(1, f.getIdFABRI());
-		
+
 		pst.executeUpdate();
 		pst.close();
 	}
 
-	
-	
+
+
 	public void editar(Fabricante f) throws SQLException{
-	
+
 		String sql = "UPDATE fabricante SET Nome = ?, CNPJ = ?, Tel = ?, Endereco = ?, Numero = ?, Cidade = ?, Complemento = ?, Bairro = ?, Cep = ?, UF = ?, Email = ?, Obs = ?, Site = ? WHERE idFABRI = ? ";
 
-		
+
 		Connection conexao = ConexaoFactory.conectar();
-		
+
 		PreparedStatement pst = conexao.prepareStatement(sql);
 		pst.setString(1, f.getNome());
 		pst.setString(2, f.getCnpj());
@@ -75,21 +77,74 @@ public class FabricanteDAO {
 		pst.setString(12, f.getObs());
 		pst.setString(13, f.getSite());
 		pst.setInt(14, f.getIdFABRI());
-		
+
 		pst.executeUpdate();
 		pst.close();
-		 
-	}
-	
-	
-	
 
-		/*
+	}
+
+
+	public ArrayList<Fabricante> listar() throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM ");
+		sql.append("fabricante ");
+		sql.append("ORDER BY nome ASC ");
+
+		Connection conexao = ConexaoFactory.conectar();
+
+		PreparedStatement pst = conexao.prepareStatement(sql.toString());
+
+		ResultSet rs = pst.executeQuery();
+
+		ArrayList<Fabricante> lista = new ArrayList<Fabricante>();
+
+		while(rs.next()) {
+			Fabricante f = new Fabricante();
+			f.setIdFABRI(rs.getInt("idFABRI"));
+			f.setNome(rs.getString("Nome"));
+			f.setCnpj(rs.getString("CNPJ"));
+			f.setTel(rs.getInt("Tel"));
+			f.setEndereco(rs.getString("Endereco"));
+			f.setNumero(rs.getInt("Numero"));
+			f.setCidade(rs.getString("Cidade"));
+			f.setComplemento(rs.getString("Complemento"));
+			f.setBairro(rs.getString("Bairro"));
+			f.setCep(rs.getInt("Cep"));
+			f.setUf(rs.getString("UF"));
+			f.setEmail(rs.getString("Email"));
+			f.setObs(rs.getString("Obs"));
+			f.setSite(rs.getString("Site"));
+
+			lista.add(f);
+		}
+		return lista;
+	}
+
+
+
+	public static void main(String[] args) {
+
+		FabricanteDAO fdao = new FabricanteDAO();
+		try {
+		ArrayList<Fabricante> lista = fdao.listar();
+		
+		for(Fabricante f: lista) {
+			System.out.println("Resultado: " + f);
+		}
+		}catch(SQLException e) {
+			System.out.println("Erro ao listar");
+			e.printStackTrace();
+		}
+	}
+
+
+
+	/*
 		public static void main(String[] args) {
-		
+
 		Fabricante f1 = new Fabricante();
-		
-		
+
+
 		f1.setNome("Leonildo Junior");
 		f1.setCnpj("126.433.4343/0001");
 		f1.setTel(432423);
@@ -104,7 +159,7 @@ public class FabricanteDAO {
 		f1.setObs("teste 123");
 		f1.setSite("www.teste.com.br");
 		f1.setIdFABRI(1);
-		
+
 		FabricanteDAO fdao = new FabricanteDAO();
 
 		try {
@@ -114,10 +169,10 @@ public class FabricanteDAO {
 			System.out.println("Erro ao atualizar");
 			e.printStackTrace();
 		}
-		
-		
+
+
 		}*/
-		/*
+	/*
 		Fabricante f1 = new Fabricante();
 		f1.setNome("Leonildo");
 		f1.setCnpj("2312342");
@@ -141,12 +196,12 @@ public class FabricanteDAO {
 			System.out.println("Erro ao incluir");
 			e.printStackTrace();
 		}*/
-			
-			/*
+
+	/*
 			//Teste para excluir fabricante
 			Fabricante f1 = new Fabricante();
 			f1.setIdFABRI(1);
-			
+
 			FabricanteDAO fdao = new FabricanteDAO();
 
 			try {
@@ -156,15 +211,15 @@ public class FabricanteDAO {
 				System.out.println("Erro ao excluir");
 				e.printStackTrace();
 			}*/	
-			
-		
 
 
 
 
 
-		
 
 
-		
+
+
+
+
 }
