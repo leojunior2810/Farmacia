@@ -15,7 +15,7 @@ public class FabricanteDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO fabricante ");
 		sql.append("(Nome,CNPJ,Tel,Endereco,Numero,Cidade,Complemento,Bairro,Cep,UF,Email,Obs,Site)");
-		sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+		sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 		Connection conexao = ConexaoFactory.conectar();
 
@@ -121,7 +121,7 @@ public class FabricanteDAO {
 	}
 
 
-
+/*
 	public static void main(String[] args) {
 
 		FabricanteDAO fdao = new FabricanteDAO();
@@ -135,11 +135,11 @@ public class FabricanteDAO {
 			System.out.println("Erro ao listar");
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 
 
-	/*
+		/*
 		public static void main(String[] args) {
 
 		Fabricante f1 = new Fabricante();
@@ -170,22 +170,27 @@ public class FabricanteDAO {
 			e.printStackTrace();
 		}
 
-
 		}*/
+		
+		
 	/*
+	public static void main(String[] args) {
+		
+	
 		Fabricante f1 = new Fabricante();
-		f1.setNome("Leonildo");
-		f1.setCnpj("2312342");
-		f1.setTel(432423);
-		f1.setEndereco("Rua das ruas");
-		f1.setNumero(123);
-		f1.setCidade("Recife");
-		f1.setComplemento("Teste de inclusão");
-		f1.setBairro("Água Fria");
-		f1.setCep(52121110);
-		f1.setUf("lala");
-		f1.setObs("teste 123");
-		f1.setSite("www.teste.com.br");
+		f1.setNome("Alice");
+		f1.setCnpj("454545454");
+		f1.setTel(333333);
+		f1.setEndereco("Rua do cajueiro");
+		f1.setNumero(1545);
+		f1.setCidade("Olinda");
+		f1.setComplemento("Teste de inclusão 2223");
+		f1.setBairro("Cajueiro");
+		f1.setCep(52121123);
+		f1.setUf("nanana");
+		f1.setEmail("validar@gmail.com");
+		f1.setObs("obs de teste de inclusão");
+		f1.setSite("www.aaaaa.com.br");
 
 		FabricanteDAO fdao = new FabricanteDAO();
 
@@ -195,9 +200,11 @@ public class FabricanteDAO {
 		} catch (SQLException e) {
 			System.out.println("Erro ao incluir");
 			e.printStackTrace();
-		}*/
+		}
+		
+	}*/
 
-	/*
+		/*
 			//Teste para excluir fabricante
 			Fabricante f1 = new Fabricante();
 			f1.setIdFABRI(1);
@@ -210,7 +217,7 @@ public class FabricanteDAO {
 			} catch (SQLException e) {
 				System.out.println("Erro ao excluir");
 				e.printStackTrace();
-			}*/	
+			}*/
 
 
 
