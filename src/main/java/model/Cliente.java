@@ -6,7 +6,7 @@ public class Cliente {
 
 	private int idCLIENTE;
 	private String nome;
-	private Date dta_nasc;
+	private String dta_nasc;
 	private String cpf;
 	private String rg;
 	private int tel;
@@ -42,7 +42,6 @@ public class Cliente {
 		
 	}
 
-	
 
 	public int getIdCLIENTE() {
 		return idCLIENTE;
@@ -64,12 +63,12 @@ public class Cliente {
 	}
 
 
-	public Date getDta_nasc() {
+	public String getDta_nasc() {
 		return dta_nasc;
 	}
 
 
-	public void setDta_nasc(Date dta_nasc) {
+	public void setDta_nasc(String dta_nasc) {
 		this.dta_nasc = dta_nasc;
 	}
 
@@ -212,6 +211,9 @@ public class Cliente {
 	public void setDtaCadastro(Date dtaCadastro) {
 		this.dtaCadastro = dtaCadastro;
 	}
+
+	
+
 	
 	
 	

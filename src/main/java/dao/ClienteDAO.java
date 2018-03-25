@@ -20,7 +20,7 @@ public class ClienteDAO {
 
 		PreparedStatement pst =  conexao.prepareStatement(sql.toString());
 		pst.setString(1, c.getNome());
-		pst.setDate(2, new java.sql.Date(c.getDta_nasc().getDate()));
+		pst.setString(2, c.getDta_nasc());
 		pst.setString(3, c.getCpf());
 		pst.setString(4, c.getRg());
 		pst.setInt(5, c.getTel());
@@ -34,7 +34,7 @@ public class ClienteDAO {
 		pst.setString(13, c.getUf());
 		pst.setString(14, c.getSexo());
 		pst.setString(15, c.getEmail());
-		pst.setDate(16, new java.sql.Date(c.getDtaCadastro().getDate()));
+		pst.setDate(16, new java.sql.Date(c.getDtaCadastro().getTime()));
 
 		pst.executeUpdate();
 		pst.close();
@@ -47,9 +47,9 @@ public class ClienteDAO {
 	public static void main(String[] args) {
 		
 		
-		Cliente c1 = new Cliente();
+		Cliente c1 = new Cliente("Leonildo", "28/10/1993", "10609554409", 0, 0, "teste", 0, "teste", "teste", "teste", 0, "teste", "", null, null);
 		c1.setNome("Leonildo");
-		c1.setDta_nasc(10/10/2018);
+		c1.setDta_nasc("28/10/1993");
 
 		ClienteDAO cdao = new ClienteDAO();
 
