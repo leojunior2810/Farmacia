@@ -1,11 +1,14 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
 import factory.ConexaoFactory;
 import model.Cliente;
+
 
 public class ClienteDAO {
 
@@ -34,12 +37,30 @@ public class ClienteDAO {
 		pst.setString(13, c.getUf());
 		pst.setString(14, c.getSexo());
 		pst.setString(15, c.getEmail());
-		pst.setDate(16, new java.sql.Date(c.getDtaCadastro().getTime()));
+
+		pst.setDate(16, new Date(c.getDtaCadastro().getTime()));
 
 		pst.executeUpdate();
 		pst.close();
 
 	}
+	
+	public void deletar(Cliente c) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append("DELETE FROM cliente ");
+		sql.append("WHERE idCLIENTE = ? ");
+
+		Connection conexao = ConexaoFactory.conectar();
+
+		PreparedStatement pst = conexao.prepareStatement(sql.toString());
+		pst.setInt(1, c.getIdCLIENTE());
+
+		pst.executeUpdate();
+		pst.close();
+	}
+	
+
+	
 	
 	
 	
@@ -47,10 +68,23 @@ public class ClienteDAO {
 	public static void main(String[] args) {
 		
 		
-		Cliente c1 = new Cliente("Leonildo", "28/10/1993", "10609554409", 0, 0, "teste", 0, "teste", "teste", "teste", 0, "teste", "", null, null);
+		Cliente c1 = new Cliente();
 		c1.setNome("Leonildo");
 		c1.setDta_nasc("28/10/1993");
-
+		c1.setCpf("10609554409");
+		c1.setRg("8849979");
+		c1.setTel(12345546);
+		c1.setCel(231432432);
+		c1.setEndereco("Rua das ruas");
+		c1.setNumCasa(123);
+		c1.setComplemento("teste");
+		c1.setBairro("Água Fria");
+		c1.setCidade("Recife");
+		c1.setCep(52121110);
+		c1.setUf("PE");
+		c1.setSexo("Masculino");
+		c1.setEmail("leo.junior2810@gmail.com");
+		
 		ClienteDAO cdao = new ClienteDAO();
 
 		try {

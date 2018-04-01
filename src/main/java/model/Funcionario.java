@@ -4,6 +4,10 @@ import java.sql.Date;
 
 public class Funcionario extends Cliente {
 	
+	
+	public Funcionario() {
+		
+	}
 
 	public Funcionario(String nome, String cpf, String rg, int tel, int cel, String endereco, int numCasa,
 			String complemento, String bairro, String cidade, int cep, String uf, String sexo, String email,

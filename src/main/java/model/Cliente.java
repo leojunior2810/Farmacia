@@ -22,6 +22,10 @@ public class Cliente {
 	private String email;
 	private Date dtaCadastro;
 	
+	public Cliente() {
+		
+	}
+	
 	
 	public Cliente(String nome, String cpf, String rg, int tel, int cel, String endereco, int numCasa,String complemento,String bairro,String cidade,int cep,String uf,String sexo,String email,Date dtaCadastro) {
 		this.nome = nome;
