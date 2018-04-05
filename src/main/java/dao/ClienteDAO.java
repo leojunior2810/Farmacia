@@ -4,20 +4,20 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+import java.util.Calendar;
 
 import factory.ConexaoFactory;
 import model.Cliente;
 
 
-public class ClienteDAO {
+public class ClienteDAO extends BasicDAO {
 
 	
 	public void incluir(Cliente c) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO cliente ");
-		sql.append("(Nome,DtaNasc,CPF,RG,Tel,Cel,Endereco,NumCasa,Complemento,Bairro,Cidade,Cep,UF,Sexo,Email,DtaCadastro)");
-		sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		sql.append("(Nome,DtaNasc,CPF,RG,Tel,Cel,Endereco,NumCasa,Complemento,Bairro,Cidade,Cep,UF,Sexo,Email,DtaCadastro,EstadoCivil)");
+		sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 		Connection conexao = ConexaoFactory.conectar();
 
@@ -37,9 +37,8 @@ public class ClienteDAO {
 		pst.setString(13, c.getUf());
 		pst.setString(14, c.getSexo());
 		pst.setString(15, c.getEmail());
-
-		pst.setDate(16, new Date(c.getDtaCadastro().getTime()));
-
+		pst.setDate(16,(c.getDtaCadastro()));
+		pst.setString(17, c.getEstadoCivil());
 		pst.executeUpdate();
 		pst.close();
 
@@ -60,6 +59,17 @@ public class ClienteDAO {
 	}
 	
 
+	@Override
+	public void editar(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listar(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
@@ -85,6 +95,8 @@ public class ClienteDAO {
 		c1.setSexo("Masculino");
 		c1.setEmail("leo.junior2810@gmail.com");
 		
+		c1.setDtaCadastro(new Date(Calendar.getInstance().getTime().getTime()));
+		c1.setEstadoCivil("Casado");
 		ClienteDAO cdao = new ClienteDAO();
 
 		try {
@@ -96,6 +108,20 @@ public class ClienteDAO {
 		}
 		
 	}
+
+	@Override
+	public void incluir(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deletar(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 	
 	

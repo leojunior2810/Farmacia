@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import factory.ConexaoFactory;
 import model.Fabricante;
 
-public class FabricanteDAO {
+public class FabricanteDAO extends BasicDAO {
 
 	public void incluir(Fabricante f) throws SQLException {
 		StringBuilder sql = new StringBuilder();
@@ -118,6 +118,30 @@ public class FabricanteDAO {
 			lista.add(f);
 		}
 		return lista;
+	}
+
+	@Override
+	public void incluir(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deletar(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void editar(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listar(Object obj) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 
 

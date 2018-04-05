@@ -21,13 +21,14 @@ public class Cliente {
 	private String sexo;
 	private String email;
 	private Date dtaCadastro;
+	private String estadoCivil;
 	
 	public Cliente() {
 		
 	}
 	
 	
-	public Cliente(String nome, String cpf, String rg, int tel, int cel, String endereco, int numCasa,String complemento,String bairro,String cidade,int cep,String uf,String sexo,String email,Date dtaCadastro) {
+	public Cliente(String nome, String cpf, String rg, int tel, int cel, String endereco, int numCasa,String complemento,String bairro,String cidade,int cep,String uf,String sexo,String email,Date dtaCadastro,String estadoCivil) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.rg = rg;
@@ -43,6 +44,8 @@ public class Cliente {
 		this.sexo = sexo;
 		this.email = email;
 		this.dtaCadastro = dtaCadastro;
+		this.estadoCivil = estadoCivil;
+		
 		
 	}
 
@@ -216,6 +219,14 @@ public class Cliente {
 		this.dtaCadastro = dtaCadastro;
 	}
 
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
 	
 
 	
