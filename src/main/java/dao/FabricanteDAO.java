@@ -11,52 +11,68 @@ import model.Fabricante;
 
 public class FabricanteDAO extends BasicDAO {
 
-	public void incluir(Fabricante f) throws SQLException {
-		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO fabricante ");
-		sql.append("(Nome,CNPJ,Tel,Endereco,Numero,Cidade,Complemento,Bairro,Cep,UF,Email,Obs,Site)");
-		sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+	@Override
+	public void incluir(Object obj) throws SQLException {
 
-		Connection conexao = ConexaoFactory.conectar();
+		if(obj instanceof Fabricante) {
+			Fabricante f = (Fabricante) obj;
 
-		PreparedStatement pst =  conexao.prepareStatement(sql.toString());
-		pst.setString(1, f.getNome());
-		pst.setString(2, f.getCnpj());
-		pst.setInt(3, f.getTel());
-		pst.setString(4, f.getEndereco());
-		pst.setInt(5, f.getNumero());
-		pst.setString(6, f.getCidade());
-		pst.setString(7,f.getComplemento());
-		pst.setString(8, f.getBairro());
-		pst.setInt(9, f.getCep());
-		pst.setString(10, f.getUf());
-		pst.setString(11, f.getEmail());
-		pst.setString(12, f.getObs());
-		pst.setString(13, f.getSite());
 
-		pst.executeUpdate();
-		pst.close();
+			StringBuilder sql = new StringBuilder();
+			sql.append("INSERT INTO fabricante ");
+			sql.append("(Nome,CNPJ,Tel,Endereco,Numero,Cidade,Complemento,Bairro,Cep,UF,Email,Obs,Site)");
+			sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
+			Connection conexao = ConexaoFactory.conectar();
+
+			PreparedStatement pst =  conexao.prepareStatement(sql.toString());
+			pst.setString(1, f.getNome());
+			pst.setString(2, f.getCnpj());
+			pst.setInt(3, f.getTel());
+			pst.setString(4, f.getEndereco());
+			pst.setInt(5, f.getNumero());
+			pst.setString(6, f.getCidade());
+			pst.setString(7,f.getComplemento());
+			pst.setString(8, f.getBairro());
+			pst.setInt(9, f.getCep());
+			pst.setString(10, f.getUf());
+			pst.setString(11, f.getEmail());
+			pst.setString(12, f.getObs());
+			pst.setString(13, f.getSite());
+
+			pst.executeUpdate();
+			pst.close();
+		}
+	}
+	
+	@Override
+	public void deletar(Object obj) throws SQLException {
+
+		if(obj instanceof Fabricante) {
+			Fabricante f = (Fabricante) obj;
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM fabricante ");
+			sql.append("WHERE idFABRI = ? ");
+
+			Connection conexao = ConexaoFactory.conectar();
+
+			PreparedStatement pst = conexao.prepareStatement(sql.toString());
+			pst.setInt(1, f.getIdFABRI());
+
+			pst.executeUpdate();
+			pst.close();
+
+		}
 	}
 
-	public void deletar(Fabricante f) throws SQLException {
-		StringBuilder sql = new StringBuilder();
-		sql.append("DELETE FROM fabricante ");
-		sql.append("WHERE idFABRI = ? ");
 
-		Connection conexao = ConexaoFactory.conectar();
-
-		PreparedStatement pst = conexao.prepareStatement(sql.toString());
-		pst.setInt(1, f.getIdFABRI());
-
-		pst.executeUpdate();
-		pst.close();
-	}
-
-
-
-	public void editar(Fabricante f) throws SQLException{
-
+	@Override
+	public void editar(Object obj) throws SQLException{
+		
+		if(obj instanceof Fabricante) {
+			Fabricante f = (Fabricante) obj;
+		
 		String sql = "UPDATE fabricante SET Nome = ?, CNPJ = ?, Tel = ?, Endereco = ?, Numero = ?, Cidade = ?, Complemento = ?, Bairro = ?, Cep = ?, UF = ?, Email = ?, Obs = ?, Site = ? WHERE idFABRI = ? ";
 
 
@@ -80,7 +96,7 @@ public class FabricanteDAO extends BasicDAO {
 
 		pst.executeUpdate();
 		pst.close();
-
+		}
 	}
 
 
@@ -120,38 +136,22 @@ public class FabricanteDAO extends BasicDAO {
 		return lista;
 	}
 
-	@Override
-	public void incluir(Object obj) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deletar(Object obj) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void editar(Object obj) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listar(Object obj) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
 
 
-/*
+
+
+
+
+
+
+
+	/*
 	public static void main(String[] args) {
 
 		FabricanteDAO fdao = new FabricanteDAO();
 		try {
 		ArrayList<Fabricante> lista = fdao.listar();
-		
+
 		for(Fabricante f: lista) {
 			System.out.println("Resultado: " + f);
 		}
@@ -163,7 +163,7 @@ public class FabricanteDAO extends BasicDAO {
 
 
 
-		/*
+	
 		public static void main(String[] args) {
 
 		Fabricante f1 = new Fabricante();
@@ -194,13 +194,13 @@ public class FabricanteDAO extends BasicDAO {
 			e.printStackTrace();
 		}
 
-		}*/
-		
-		
+		}
+
+
 	/*
 	public static void main(String[] args) {
-		
-	
+
+
 		Fabricante f1 = new Fabricante();
 		f1.setNome("Alice");
 		f1.setCnpj("454545454");
@@ -225,10 +225,10 @@ public class FabricanteDAO extends BasicDAO {
 			System.out.println("Erro ao incluir");
 			e.printStackTrace();
 		}
-		
+
 	}*/
 
-		/*
+	/*
 			//Teste para excluir fabricante
 			Fabricante f1 = new Fabricante();
 			f1.setIdFABRI(1);

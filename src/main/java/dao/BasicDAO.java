@@ -10,6 +10,5 @@ public abstract class BasicDAO {
 	
 	public abstract void editar(Object obj) throws SQLException;
 	
-	public abstract void listar(Object obj) throws SQLException;
 	
 }
