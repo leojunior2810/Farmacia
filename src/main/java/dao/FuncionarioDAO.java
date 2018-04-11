@@ -2,7 +2,9 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import factory.ConexaoFactory;
 import model.Funcionario;
@@ -105,6 +107,45 @@ public class FuncionarioDAO extends BasicDAO {
 
 	}
 
+	
+	public ArrayList<Funcionario> listar() throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT * FROM ");
+		sql.append("funcionario ");
+		sql.append("ORDER BY nome ASC ");
+
+		Connection conexao = ConexaoFactory.conectar();
+
+		PreparedStatement pst = conexao.prepareStatement(sql.toString());
+
+		ResultSet rs = pst.executeQuery();
+
+		ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
+
+		while(rs.next()) {
+			Funcionario f = new Funcionario();
+			f.setIdFUNC(rs.getInt("idFUNC"));
+			f.setNome(rs.getString("Nome"));
+			f.setCpf(rs.getString("CPF"));
+			f.setRg(rs.getString("RG"));
+			f.setUsuario(rs.getString("Usuario"));
+			f.setEndereco(rs.getString("Endereco"));
+			f.setNumCasa(rs.getInt("NumCasa"));
+			f.setComplemento(rs.getString("Complemento"));
+			f.setBairro(rs.getString("Bairro"));
+			f.setCidade(rs.getString("Cidade"));
+			f.setUf(rs.getString("UF"));
+			f.setCep(rs.getInt("Cep"));
+			f.setDtaCadastro(rs.getDate("DtaCadastro"));
+			f.setTel(rs.getInt("Tel"));
+			f.setCel(rs.getInt("Cel"));
+			f.setEmail(rs.getString("Email"));
+			f.setSexo(rs.getString("Sexo"));
+			
+			lista.add(f);
+		}
+		return lista;
+	}
 
 
 }

@@ -18,6 +18,35 @@ public class Fabricante {
 	private String site;
 
 
+	
+	public Fabricante() {
+		
+	}
+	
+	
+	
+	public Fabricante(String nome, String cnpj, int tel, String endereco, int numero, String cidade,
+			String complemento, String bairro, int cep, String uf, String email, String obs, String site) {
+		this.nome = nome;
+		this.cnpj = cnpj;
+		this.tel = tel;
+		this.endereco = endereco;
+		this.numero = numero;
+		this.cidade = cidade;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.uf = uf;
+		this.email = email;
+		this.obs = obs;
+		this.site = site;
+	}
+
+
+
+
+
+
 	public int getIdFABRI() {
 		return idFABRI;
 	}
