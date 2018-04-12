@@ -19,7 +19,7 @@ public class FuncionarioDAO extends BasicDAO {
 			Funcionario f = (Funcionario) obj;
 
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO cliente ");
+			sql.append("INSERT INTO funcionario ");
 			sql.append("(Nome,CPF,RG,Usuario,Senha,Endereco,NumCasa,Complemento,Bairro,Cidade,UF,Cep,DtaCadastro,Tel,Cel,Email,Sexo)");
 			sql.append("VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 

@@ -23,9 +23,14 @@ public class Fornecedor extends Fabricante {
 
 	public Fornecedor(String nome, String cnpj, int tel, String endereco, int numero, String cidade,
 			String complemento, String bairro, int cep, String uf, String email, String obs, String site) {
+	
 	}
 
-
+	public String toString() {
+		String saida = idFORNE + "-" + getNome();
+		
+		return saida;
+	}
 	
 	
 	

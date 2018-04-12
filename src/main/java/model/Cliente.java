@@ -230,7 +230,12 @@ public class Cliente {
 	
 
 	
-	
+	public String toString() {
+		String saida = idCLIENTE + "-" + nome + "-" + dta_nasc + "-" + cpf + "-" + rg + "-" + tel + "-" + cel + "-" + endereco + "-" +
+				numCasa + "-" + complemento + "-" + bairro + "-" + cidade + "-" + cep + "-" + uf + "-" + sexo + "-" + email + "-" + dtaCadastro + "-" +
+				estadoCivil;
+		return saida;
+	}
 	
 	
 	
