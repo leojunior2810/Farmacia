@@ -27,7 +27,7 @@ public class Fornecedor extends Fabricante {
 	}
 
 	public String toString() {
-		String saida = idFORNE + "-" + getNome();
+		String saida = idFORNE + "-" + getNome() + "-" + getCnpj();
 		
 		return saida;
 	}

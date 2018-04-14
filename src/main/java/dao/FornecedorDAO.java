@@ -74,7 +74,7 @@ public class FornecedorDAO extends BasicDAO {
 		if(obj instanceof Fornecedor) {
 			Fornecedor f = (Fornecedor) obj;
 
-			String sql = "UPDATE Fornecedor SET Nome = ?, CNPJ = ?, Tel = ?, Endereco = ?, Cidade = ?, Numero = ?, Complemento = ?, Bairro = ?, Cep = ?, UF = ?, Email = ?, Obs = ?, Site = ? WHERE idFABRI = ? ";
+			String sql = "UPDATE fornecedor SET Nome = ?, CNPJ = ?, Tel = ?, Endereco = ?, Cidade = ?, Numero = ?, Complemento = ?, Bairro = ?, Cep = ?, UF = ?, Email = ?, Obs = ?, Site = ? WHERE idFABRI = ? ";
 
 
 			Connection conexao = ConexaoFactory.conectar();
@@ -117,7 +117,7 @@ public class FornecedorDAO extends BasicDAO {
 
 		while(rs.next()) {
 			Fornecedor f = new Fornecedor();
-			f.setIdFORNE(rs.getInt("idFABRI"));
+			f.setIdFORNE(rs.getInt("idFORNE"));
 			f.setNome(rs.getString("Nome"));
 			f.setCnpj(rs.getString("CNPJ"));
 			f.setTel(rs.getInt("Tel"));
@@ -139,5 +139,21 @@ public class FornecedorDAO extends BasicDAO {
 	
 	
 
+	
+	public static void main(String[] args) {
+
+		FornecedorDAO fdao = new FornecedorDAO();
+		try {
+		ArrayList<Fornecedor> lista = fdao.listar();
+
+		for(Fornecedor f: lista) {
+			System.out.println("Resultado: " + f);
+		}
+		}catch(SQLException e) {
+			System.out.println("Erro ao listar");
+			e.printStackTrace();
+		}
+	}
+	
 
 }
