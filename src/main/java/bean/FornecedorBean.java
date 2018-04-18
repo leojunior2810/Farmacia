@@ -1,31 +1,99 @@
 package bean;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.model.ListDataModel;
+
+
+import dao.FornecedorDAO;
+import model.Fornecedor;
+
+@ManagedBean(name = "MBFornecedor")
+@ViewScoped
 public class FornecedorBean extends BasicBean {
 
-	@Override
+	private Fornecedor fornecedor;
+	private ListDataModel<Fornecedor> itens;
+
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+
+	public ListDataModel<Fornecedor> getItens() {
+		return itens;
+	}
+
+
+	public void setItens(ListDataModel<Fornecedor> itens) {
+		this.itens = itens;
+	}
+
+	@PostConstruct
 	public void pesquisa() {
-		// TODO Auto-generated method stub
-		
+		try {
+			FornecedorDAO dao = new FornecedorDAO();
+			ArrayList<Fornecedor> lista = dao.listar();
+			itens = new ListDataModel<Fornecedor>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}	
 	}
 
-	@Override
+
 	public void novo() {
-		// TODO Auto-generated method stub
-		
+		try {
+			fornecedor = new Fornecedor();
+			FornecedorDAO dao = new FornecedorDAO();
+			dao.incluir(fornecedor);
+
+			ArrayList<Fornecedor> lista = dao.listar();
+			itens = new ListDataModel<Fornecedor>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
-	@Override
+
 	public void excluir() {
-		// TODO Auto-generated method stub
-		
+		try {
+			fornecedor = itens.getRowData();
+
+			FornecedorDAO dao = new FornecedorDAO();
+			dao.deletar(fornecedor);
+
+			ArrayList<Fornecedor> lista = dao.listar();
+			itens = new ListDataModel<Fornecedor>(lista);
+
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
-	@Override
+
 	public void alterar() {
-		// TODO Auto-generated method stub
-		
+		try {
+			fornecedor = itens.getRowData();
+			FornecedorDAO dao = new FornecedorDAO();
+			dao.editar(fornecedor);
+
+			ArrayList<Fornecedor> lista = dao.listar();
+			itens = new ListDataModel<Fornecedor>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
-	
-	
+
+
 }

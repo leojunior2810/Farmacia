@@ -1,29 +1,98 @@
 package bean;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.model.ListDataModel;
+
+import dao.ItemVendaDAO;
+import model.ItemVenda;
+
+@ManagedBean(name = "MBItem")
+@ViewScoped
 public class ItemVendaBean extends BasicBean {
 
-	@Override
+	private ItemVenda itemVenda;
+	private ListDataModel<ItemVenda> itens;
+
+
+	public ItemVenda getItemVenda() {
+		return itemVenda;
+	}
+
+
+	public void setItemVenda(ItemVenda itemVenda) {
+		this.itemVenda = itemVenda;
+	}
+
+
+	public ListDataModel<ItemVenda> getItens() {
+		return itens;
+	}
+
+
+	public void setItens(ListDataModel<ItemVenda> itens) {
+		this.itens = itens;
+	}
+
+
+	@PostConstruct
 	public void pesquisa() {
-		// TODO Auto-generated method stub
-		
+		try {
+			ItemVendaDAO dao = new ItemVendaDAO();
+			ArrayList<ItemVenda> lista = dao.listar();
+			itens = new ListDataModel<ItemVenda>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}	
 	}
 
-	@Override
+
+
 	public void novo() {
-		// TODO Auto-generated method stub
-		
+		try {
+			itemVenda = new ItemVenda();
+			ItemVendaDAO dao = new ItemVendaDAO();
+			dao.incluir(itemVenda);
+
+			ArrayList<ItemVenda> lista = dao.listar();
+			itens = new ListDataModel<ItemVenda>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
-	@Override
+
 	public void excluir() {
-		// TODO Auto-generated method stub
-		
+		try {
+			itemVenda = itens.getRowData();
+
+			ItemVendaDAO dao = new ItemVendaDAO();
+			dao.deletar(itemVenda);
+
+			ArrayList<ItemVenda> lista = dao.listar();
+			itens = new ListDataModel<ItemVenda>(lista);
+
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
-	@Override
+
 	public void alterar() {
-		// TODO Auto-generated method stub
-		
+		try {
+			itemVenda = itens.getRowData();
+			ItemVendaDAO dao = new ItemVendaDAO();
+			dao.editar(itemVenda);
+
+			ArrayList<ItemVenda> lista = dao.listar();
+			itens = new ListDataModel<ItemVenda>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }

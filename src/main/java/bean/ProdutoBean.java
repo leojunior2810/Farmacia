@@ -1,29 +1,97 @@
 package bean;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.model.ListDataModel;
+
+import dao.ProdutoDAO;
+import model.Produto;
+
+@ManagedBean(name = "MBProduto")
+@ViewScoped
 public class ProdutoBean extends BasicBean {
 
-	@Override
+	private Produto produto;
+	private ListDataModel<Produto> itens;
+
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+
+	public ListDataModel<Produto> getItens() {
+		return itens;
+	}
+
+
+	public void setItens(ListDataModel<Produto> itens) {
+		this.itens = itens;
+	}
+
+
+	@PostConstruct
 	public void pesquisa() {
-		// TODO Auto-generated method stub
-		
+		try {
+			ProdutoDAO dao = new ProdutoDAO();
+			ArrayList<Produto> lista = dao.listar();
+			itens = new ListDataModel<Produto>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}	
 	}
 
-	@Override
+
 	public void novo() {
-		// TODO Auto-generated method stub
-		
+		try {
+			produto = new Produto();
+			ProdutoDAO dao = new ProdutoDAO();
+			dao.incluir(produto);
+
+			ArrayList<Produto> lista = dao.listar();
+			itens = new ListDataModel<Produto>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
-	@Override
+
 	public void excluir() {
-		// TODO Auto-generated method stub
-		
+		try {
+			produto = itens.getRowData();
+
+			ProdutoDAO dao = new ProdutoDAO();
+			dao.deletar(produto);
+
+			ArrayList<Produto> lista = dao.listar();
+			itens = new ListDataModel<Produto>(lista);
+
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
-	@Override
+
 	public void alterar() {
-		// TODO Auto-generated method stub
-		
+		try {
+			produto = itens.getRowData();
+			ProdutoDAO dao = new ProdutoDAO();
+			dao.editar(produto);
+
+			ArrayList<Produto> lista = dao.listar();
+			itens = new ListDataModel<Produto>(lista);
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }
