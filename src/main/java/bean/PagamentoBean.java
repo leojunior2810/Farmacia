@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.ListDataModel;
 
 import dao.PagamentoDAO;
 import model.Pagamento;
 
 @ManagedBean(name = "MBPagamento")
-@ViewScoped
+@RequestScoped
 public class PagamentoBean extends BasicBean {
 
 	private Pagamento pagamento;

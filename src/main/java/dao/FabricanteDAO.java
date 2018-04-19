@@ -164,7 +164,7 @@ public class FabricanteDAO extends BasicDAO {
 
 
 	
-		public static void main(String[] args) {
+		/*public static void main(String[] args) {
 
 		Fabricante f1 = new Fabricante();
 
@@ -195,14 +195,14 @@ public class FabricanteDAO extends BasicDAO {
 		}
 
 		}
+*/
 
-
-	/*
+	
 	public static void main(String[] args) {
 
 
 		Fabricante f1 = new Fabricante();
-		f1.setNome("Alice");
+		f1.setNome("Leonildo");
 		f1.setCnpj("454545454");
 		f1.setTel(333333);
 		f1.setEndereco("Rua do cajueiro");
@@ -226,7 +226,7 @@ public class FabricanteDAO extends BasicDAO {
 			e.printStackTrace();
 		}
 
-	}*/
+	}
 
 	/*
 			//Teste para excluir fabricante
@@ -241,8 +241,8 @@ public class FabricanteDAO extends BasicDAO {
 			} catch (SQLException e) {
 				System.out.println("Erro ao excluir");
 				e.printStackTrace();
-			}*/
-
+			}
+*/
 
 
 

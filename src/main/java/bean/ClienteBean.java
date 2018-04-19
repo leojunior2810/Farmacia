@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.ListDataModel;
 
 import dao.ClienteDAO;
@@ -15,7 +15,7 @@ import model.Cliente;
 
 
 @ManagedBean(name = "MBCliente")
-@ViewScoped
+@RequestScoped
 public class ClienteBean extends BasicBean {
 	private Cliente cliente;
 	private ListDataModel<Cliente> itens;

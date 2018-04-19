@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/index.xhtml">
+
+
+	<ui:define name="menu">
+		<ui:include src="/componentes/menuPrincipal.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		
+		<p:dataTable emptyMessage="Nenhum registro encontrado."
+									value="#{MBFabricante.itens}"
+									var="item"
+									paginator="true"
+									rows="5">
+			<f:facet name="header">
+				Fabricante - Listagem
+			</f:facet>
+									
+			<p:column headerText="Código">
+				<h:outputText value="#{item.idFABRI}" />
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputText value="#{item.nome}" />
+			</p:column>
+			<p:column headerText="Cnpj">
+				<h:outputText value="#{item.cnpj}" />
+			</p:column>
+			<p:column headerText="Telefone">
+				<h:outputText value="#{item.tel}" />
+			</p:column>
+			<p:column headerText="Endereço">
+				<h:outputText value="#{item.endereco}" />
+			</p:column>
+			<p:column headerText="Número">
+				<h:outputText value="#{item.numero}" />
+			</p:column>
+			<p:column headerText="Cidade">
+				<h:outputText value="#{item.cidade}" />
+			</p:column>
+			<p:column headerText="Complemento">
+				<h:outputText value="#{item.complemento}" />
+			</p:column>
+			<p:column headerText="Bairro">
+				<h:outputText value="#{item.bairro}" />
+			</p:column>
+			<p:column headerText="Cep">
+				<h:outputText value="#{item.cep}" />
+			</p:column>
+			<p:column headerText="UF">
+				<h:outputText value="#{item.uf}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{item.email}" />
+			</p:column>
+			<p:column headerText="Obs">
+				<h:outputText value="#{item.obs}" />
+			</p:column>
+			<p:column headerText="Site">
+				<h:outputText value="#{item.site}" />
+			</p:column>
+			
+			<f:facet name="footer">
+				<p:commandButton value="Novo" actionListener="#{MBFabricante.prepararNovo}" update="formFabNovo:panelFabNovo" oncomplete="PF('FabNovo').show();"></p:commandButton>
+			</f:facet>
+		</p:dataTable>
+	
+		<p:dialog widgetVar="FabNovo" closeble="false" resizable="true" header="Novo Fabricante" modal="true" appendTo="@(body)" closable="false">
+			<h:form id="formFabNovo">
+				<h:panelGrid id="panelFabNovo" columns="2">
+					<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.nome}"></p:inputText>
+					<p:outputLabel value="Cnpj"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.cnpj}"></p:inputText>
+					<p:outputLabel value="Telefone"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.tel}"></p:inputText>
+					<p:outputLabel value="Endereço"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.endereco}"></p:inputText>
+					<p:outputLabel value="Número"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.numero}"></p:inputText>
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.cidade}"></p:inputText>
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.complemento}"></p:inputText>
+					<p:outputLabel value="Bairro"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.bairro}"></p:inputText>
+					<p:outputLabel value="Cep"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.cep}"></p:inputText>
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.uf}"></p:inputText>
+					<p:outputLabel value="Email"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.email}"></p:inputText>
+					<p:outputLabel value="Obs"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.obs}"></p:inputText>
+					<p:outputLabel value="Site"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.site}"></p:inputText>
+				</h:panelGrid>
+					<h:panelGrid columns="2">
+						<p:commandButton value="Gravar" actionListener="#{MBFabricante.novo}"></p:commandButton>
+						<p:commandButton value="Fechar" onclick="PF('FabNovo').hide();"></p:commandButton>
+					</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	
+	</ui:define>
+	
+</ui:composition>

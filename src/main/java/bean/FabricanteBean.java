@@ -5,14 +5,15 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
 import dao.FabricanteDAO;
 import model.Fabricante;
 
 @ManagedBean(name = "MBFabricante")
-@ViewScoped
+@SessionScoped
 public class FabricanteBean extends BasicBean {
 	private Fabricante fabricante;
 	private ListDataModel<Fabricante> itens;
@@ -43,10 +44,14 @@ public class FabricanteBean extends BasicBean {
 			ex.printStackTrace();
 		}
 	}
-
+	
+	
+	public void prepararNovo() {
+		fabricante = new Fabricante();
+	}
+	
 	public void novo() {
 		try {
-			fabricante = new Fabricante();
 			FabricanteDAO dao = new FabricanteDAO();
 			dao.incluir(fabricante);
 
