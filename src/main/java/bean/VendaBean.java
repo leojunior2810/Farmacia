@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
 import dao.VendaDAO;
 import model.Venda;
 
 @ManagedBean(name = "MBVenda")
-@RequestScoped
+@SessionScoped
 public class VendaBean extends BasicBean {
 
 	private Venda venda;

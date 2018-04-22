@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
 import dao.FuncionarioDAO;
@@ -13,7 +13,7 @@ import model.Funcionario;
 
 
 @ManagedBean(name = "MBFuncionario")
-@RequestScoped
+@SessionScoped
 public class FuncionarioBean extends BasicBean {
 
 	private Funcionario funcionario;

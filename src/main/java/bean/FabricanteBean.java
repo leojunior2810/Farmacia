@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
@@ -50,6 +49,10 @@ public class FabricanteBean extends BasicBean {
 		fabricante = new Fabricante();
 	}
 	
+	public void prepararExcluir() {
+		fabricante = itens.getRowData();
+	}
+	
 	public void novo() {
 		try {
 			FabricanteDAO dao = new FabricanteDAO();
@@ -62,10 +65,10 @@ public class FabricanteBean extends BasicBean {
 		}
 	}
 
+	
+	
 	public void excluir() {
 		try {
-			fabricante = itens.getRowData();
-
 			FabricanteDAO dao = new FabricanteDAO();
 			dao.deletar(fabricante);
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
 
@@ -13,7 +13,7 @@ import dao.FornecedorDAO;
 import model.Fornecedor;
 
 @ManagedBean(name = "MBFornecedor")
-@RequestScoped
+@SessionScoped
 public class FornecedorBean extends BasicBean {
 
 	private Fornecedor fornecedor;
