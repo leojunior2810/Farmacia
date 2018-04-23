@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/index.xhtml">
+
+
+
+	<ui:define name="menu">
+		<ui:include src="/componentes/menuPrincipal.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmCliListagem">
+			<p:dataTable id="tblClientes"
+				emptyMessage="Nenhum registro encontrado."
+				value="#{MBCliente.itens}" var="item" paginator="true" rows="4">
+				<f:facet name="header">
+				Cliente - Listagem
+			</f:facet>
+
+				<p:column headerText="Código" sortBy="#{item.idCLIENTE}">
+					<h:outputText value="#{item.idCLIENTE}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+				<p:column headerText="DataNascimento">
+					<h:outputText value="#{item.dta_nasc}" />
+				</p:column>
+				<p:column headerText="CPF">
+					<h:outputText value="#{item.cpf}" />
+				</p:column>
+				<p:column headerText="RG">
+					<h:outputText value="#{item.rg}" />
+				</p:column>
+				<p:column headerText="Telefone">
+					<h:outputText value="#{item.tel}" />
+				</p:column>
+				<p:column headerText="Celular">
+					<h:outputText value="#{item.cel}" />
+				</p:column>
+				<p:column headerText="Endereço">
+					<h:outputText value="#{item.endereco}" />
+				</p:column>
+				<p:column headerText="NúmeroCasa">
+					<h:outputText value="#{item.numCasa}" />
+				</p:column>
+				<p:column headerText="Complemento">
+					<h:outputText value="#{item.complemento}" />
+				</p:column>
+				<p:column headerText="Bairro">
+					<h:outputText value="#{item.bairro}" />
+				</p:column>
+				<p:column headerText="Cidade">
+					<h:outputText value="#{item.cidade}" />
+				</p:column>
+				<p:column headerText="Cep">
+					<h:outputText value="#{item.cep}" />
+				</p:column>
+				<p:column headerText="UF">
+					<h:outputText value="#{item.uf}" />
+				</p:column>
+
+				<p:column headerText="Sexo">
+					<h:outputText value="#{item.sexo}" />
+				</p:column>
+
+				<p:column headerText="Email">
+					<h:outputText value="#{item.email}" />
+				</p:column>
+
+				<p:column headerText="DataCadastro">
+					<h:outputText value="#{item.dtaCadastro}" />
+				</p:column>
+
+				<p:column headerText="EstadoCivil">
+					<h:outputText value="#{item.estadoCivil}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton value="Excluir"
+						actionListener="#{MBCliente.prepararExcluir}"
+						oncomplete="PF('CliExcluir').show();"
+						update=":frmCliExcluir:pnLCliExcluir" />
+				</p:column>
+			
+			<f:facet name="footer">
+					<p:commandButton value="Novo"
+						actionListener="#{MBCliente.prepararNovo}"
+						oncomplete="PF('CliNovo').show();" update=":frmCliNovo:pnLCliNovo"></p:commandButton>
+				</f:facet>
+			</p:dataTable>
+		</h:form>
+		<p:dialog widgetVar="CliNovo" closeble="false" draggable="true"
+			resizable="true" header="Novo Cliente" modal="true"
+			appendTo="@(body)">
+			<h:form id="frmCliNovo">
+				<h:panelGrid id="pnLCliNovo" columns="2">
+					<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.nome}"></p:inputText>
+					<p:outputLabel value="DataNascimento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.dta_nasc}"></p:inputText>
+					<p:outputLabel value="CPF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.cpf}"></p:inputText>
+					<p:outputLabel value="RG"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.rg}"></p:inputText>
+					<p:outputLabel value="Telefone"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.tel}"></p:inputText>
+					<p:outputLabel value="Celular"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.cel}"></p:inputText>
+					<p:outputLabel value="Endereço"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.endereco}"></p:inputText>
+					<p:outputLabel value="NúmeroCasa"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.numCasa}"></p:inputText>
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.complemento}"></p:inputText>
+					<p:outputLabel value="Bairro"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.bairro}"></p:inputText>
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.cidade}"></p:inputText>
+					<p:outputLabel value="CEP"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.cep}"></p:inputText>
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.uf}"></p:inputText>
+					<p:outputLabel value="Sexo"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.sexo}"></p:inputText>
+					<p:outputLabel value="Email"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.email}"></p:inputText>
+					<p:outputLabel value="DataCadastro"></p:outputLabel>
+					<p:calendar required="true" value="#{MBCliente.cliente.dtaCadastro}"></p:calendar>
+					<p:outputLabel value="EstadoCivil"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.estadoCivil}"></p:inputText>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Gravar"
+						actionListener="#{MBCliente.novo}"
+						oncomplete="PF('CliNovo').hide();"
+						update=":frmCliListagem:tblClientes"></p:commandButton>
+					<p:commandButton value="Fechar" onclick="PF('CliNovo').hide();"></p:commandButton>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog widgetVar="CliExcluir" closable="false" draggable="false"
+			resizable="false" modal="true" appendTo="@(body)"
+			header="Cliente - Excluir">
+			<h:form id="frmCliExcluir">
+				<h:panelGrid id="pnLCliExcluir" columns="2">
+					<h:outputText value="Código:"></h:outputText>
+					<h:outputText value="#{MBCliente.cliente.idCLIENTE}"></h:outputText>
+
+					<h:outputText value="Nome:"></h:outputText>
+					<h:outputText value="#{MBCliente.cliente.nome}"></h:outputText>
+
+				</h:panelGrid>
+				<h:panelGrid>
+					<p:commandButton value="Confirmar"
+						actionListener="#{MBCliente.excluir}"
+						oncomplete="PF('CliExcluir').hide();"
+						update=":frmCliListagem:tblClientes"></p:commandButton>
+					<p:commandButton value="Cancelar"
+						onclick="PF('CliExcluir').hide();"></p:commandButton>
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+
+
+</ui:composition>

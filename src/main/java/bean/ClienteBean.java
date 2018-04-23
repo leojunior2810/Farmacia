@@ -53,10 +53,17 @@ public class ClienteBean extends BasicBean {
 
 
 
+	public void prepararNovo() {
+		cliente = new Cliente();
+	}
+	
+	public void prepararExcluir() {
+		cliente = itens.getRowData();
+	}
+	
 
 	public void novo() {
 		try {
-			cliente = new Cliente();
 			ClienteDAO dao = new ClienteDAO();
 			dao.incluir(cliente);
 
@@ -72,7 +79,6 @@ public class ClienteBean extends BasicBean {
 
 	public void excluir() {
 		try {
-			cliente = itens.getRowData();
 
 			ClienteDAO dao = new ClienteDAO();
 			dao.deletar(cliente);
