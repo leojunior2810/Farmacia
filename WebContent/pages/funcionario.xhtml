@@ -6,30 +6,26 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/index.xhtml">
-
-
-
+	
+	
 	<ui:define name="menu">
 		<ui:include src="/componentes/menuPrincipal.xhtml"></ui:include>
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<h:form id="frmCliListagem">
-			<p:dataTable id="tblClientes"
+		<h:form id="frmFuncListagem">
+			<p:dataTable id="tblFuncionarios"
 				emptyMessage="Nenhum registro encontrado."
-				value="#{MBCliente.itens}" var="item" paginator="true" rows="4">
+				value="#{MBFuncionario.itens}" var="item" paginator="true" rows="4">
 				<f:facet name="header">
-				Cliente - Listagem
+				Funcionario - Listagem
 			</f:facet>
 
-				<p:column headerText="Código" sortBy="#{item.idCLIENTE}">
-					<h:outputText value="#{item.idCLIENTE}" />
+				<p:column headerText="Código" sortBy="#{item.idFUNC}">
+					<h:outputText value="#{item.idFUNC}" />
 				</p:column>
 				<p:column headerText="Nome">
 					<h:outputText value="#{item.nome}" />
-				</p:column>
-				<p:column headerText="DataNascimento">
-					<h:outputText value="#{item.dta_nasc}" />
 				</p:column>
 				<p:column headerText="CPF">
 					<h:outputText value="#{item.cpf}" />
@@ -37,11 +33,8 @@
 				<p:column headerText="RG">
 					<h:outputText value="#{item.rg}" />
 				</p:column>
-				<p:column headerText="Telefone">
-					<h:outputText value="#{item.tel}" />
-				</p:column>
-				<p:column headerText="Celular">
-					<h:outputText value="#{item.cel}" />
+				<p:column headerText="Usuário">
+					<h:outputText value="#{item.usuario}" />
 				</p:column>
 				<p:column headerText="Endereço">
 					<h:outputText value="#{item.endereco}" />
@@ -58,50 +51,49 @@
 				<p:column headerText="Cidade">
 					<h:outputText value="#{item.cidade}" />
 				</p:column>
-				<p:column headerText="Cep">
-					<h:outputText value="#{item.cep}" />
-				</p:column>
 				<p:column headerText="UF">
 					<h:outputText value="#{item.uf}" />
 				</p:column>
-
+				<p:column headerText="Cep">
+					<h:outputText value="#{item.cep}" />
+				</p:column>
+				<p:column headerText="DataCadastro">
+					<h:outputText value="#{item.dtaCadastro}" />
+				</p:column>
+				<p:column headerText="Telefone">
+					<h:outputText value="#{item.tel}" />
+				</p:column>
+				<p:column headerText="Celular">
+					<h:outputText value="#{item.cel}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{item.email}" />
+				</p:column>
 				<p:column headerText="Sexo">
 					<h:outputText value="#{item.sexo}" />
 				</p:column>
 
-				<p:column headerText="Email">
-					<h:outputText value="#{item.email}" />
-				</p:column>
-
-				<p:column headerText="DataCadastro">
-					<h:outputText value="#{item.dtaCadastro}" />
-				</p:column>
-
-				<p:column headerText="EstadoCivil">
-					<h:outputText value="#{item.estadoCivil}" />
-				</p:column>
-
 				<p:column headerText="Opções">
 					<p:commandButton value="Excluir"
-						actionListener="#{MBCliente.prepararExcluir}"
-						oncomplete="PF('CliExcluir').show();"
-						update=":frmCliExcluir:pnLCliExcluir" />
+						actionListener="#{MBFuncionario.prepararExcluir}"
+						oncomplete="PF('FuncExcluir').show();"
+						update=":frmFuncExcluir:pnLFuncExcluir" />
 				</p:column>
 			
 			<f:facet name="footer">
 					<p:commandButton value="Novo"
-						actionListener="#{MBCliente.prepararNovo}"
-						oncomplete="PF('CliNovo').show();" update=":frmCliNovo:pnLCliNovo"></p:commandButton>
+						actionListener="#{MBFuncionario.prepararNovo}"
+						oncomplete="PF('FuncNovo').show();" update=":frmFuncNovo:pnLFuncNovo"></p:commandButton>
 				</f:facet>
 			</p:dataTable>
 		</h:form>
-		<p:dialog widgetVar="CliNovo" closeble="false" draggable="true"
+		<p:dialog widgetVar="FuncNovo" closeble="false" draggable="true"
 			resizable="true" header="Novo Cliente" modal="true"
 			appendTo="@(body)">
-			<h:form id="frmCliNovo">
-				<h:panelGrid id="pnLCliNovo" columns="2">
+			<h:form id="frmFuncNovo">
+				<h:panelGrid id="pnLFuncNovo" columns="2">
 					<p:outputLabel value="Nome"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.nome}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.nome}"></p:inputText>
 					<p:outputLabel value="DataNascimento"></p:outputLabel>
 					<p:inputText size="30" value="#{MBCliente.cliente.dta_nasc}"></p:inputText>
 					<p:outputLabel value="CPF"></p:outputLabel>
@@ -171,6 +163,8 @@
 
 	</ui:define>
 
-
-
+	
+	
+	
+	
 </ui:composition>
