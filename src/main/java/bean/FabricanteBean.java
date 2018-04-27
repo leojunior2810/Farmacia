@@ -52,6 +52,10 @@ public class FabricanteBean extends BasicBean {
 	public void prepararExcluir() {
 		fabricante = itens.getRowData();
 	}
+
+	public void prepararAlterar() {
+		fabricante = itens.getRowData();
+	}
 	
 	public void novo() {
 		try {
@@ -82,7 +86,6 @@ public class FabricanteBean extends BasicBean {
 
 	public void alterar() {
 		try {
-			fabricante = itens.getRowData();
 			FabricanteDAO dao = new FabricanteDAO();
 			dao.editar(fabricante);
 

@@ -94,68 +94,68 @@
 				<h:panelGrid id="pnLFuncNovo" columns="2">
 					<p:outputLabel value="Nome"></p:outputLabel>
 					<p:inputText size="30" value="#{MBFuncionario.funcionario.nome}"></p:inputText>
-					<p:outputLabel value="DataNascimento"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.dta_nasc}"></p:inputText>
 					<p:outputLabel value="CPF"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.cpf}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.cpf}"></p:inputText>
 					<p:outputLabel value="RG"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.rg}"></p:inputText>
-					<p:outputLabel value="Telefone"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.tel}"></p:inputText>
-					<p:outputLabel value="Celular"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.cel}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.rg}"></p:inputText>
+					<p:outputLabel value="Usuário"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.usuario}"></p:inputText>
+					<p:outputLabel value="Senha"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.senha}"></p:inputText>
 					<p:outputLabel value="Endereço"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.endereco}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.endereco}"></p:inputText>
 					<p:outputLabel value="NúmeroCasa"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.numCasa}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.numCasa}"></p:inputText>
 					<p:outputLabel value="Complemento"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.complemento}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.complemento}"></p:inputText>
 					<p:outputLabel value="Bairro"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.bairro}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.bairro}"></p:inputText>
 					<p:outputLabel value="Cidade"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.cidade}"></p:inputText>
-					<p:outputLabel value="CEP"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.cep}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.cidade}"></p:inputText>
 					<p:outputLabel value="UF"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.uf}"></p:inputText>
-					<p:outputLabel value="Sexo"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.sexo}"></p:inputText>
-					<p:outputLabel value="Email"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.email}"></p:inputText>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.uf}"></p:inputText>
+					<p:outputLabel value="CEP"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.cep}"></p:inputText>
 					<p:outputLabel value="DataCadastro"></p:outputLabel>
-					<p:inputText value="#{MBCliente.cliente.dtaCadastro}"></p:inputText>
-					<p:outputLabel value="EstadoCivil"></p:outputLabel>
-					<p:inputText size="30" value="#{MBCliente.cliente.estadoCivil}"></p:inputText>
+					<p:inputText value="#{MBFuncionario.funcionario.dtaCadastro}"></p:inputText>
+					<p:outputLabel value="Telefone"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.tel}"></p:inputText>
+					<p:outputLabel value="Celular"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.cel}"></p:inputText>
+					<p:outputLabel value="Sexo"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.sexo}"></p:inputText>
+					<p:outputLabel value="Email"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.email}"></p:inputText>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Gravar"
-						actionListener="#{MBCliente.novo}"
-						oncomplete="PF('CliNovo').hide();"
-						update=":frmCliListagem:tblClientes"></p:commandButton>
-					<p:commandButton value="Fechar" onclick="PF('CliNovo').hide();"></p:commandButton>
+						actionListener="#{MBFuncionario.novo}"
+						oncomplete="PF('FuncNovo').hide();"
+						update=":frmFuncListagem:tblFuncionarios"></p:commandButton>
+					<p:commandButton value="Fechar" onclick="PF('FuncNovo').hide();"></p:commandButton>
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
 
-		<p:dialog widgetVar="CliExcluir" closable="false" draggable="false"
+		<p:dialog widgetVar="FuncExcluir" closable="false" draggable="false"
 			resizable="false" modal="true" appendTo="@(body)"
-			header="Cliente - Excluir">
-			<h:form id="frmCliExcluir">
-				<h:panelGrid id="pnLCliExcluir" columns="2">
+			header="Funcionário - Excluir">
+			<h:form id="frmFuncExcluir">
+				<h:panelGrid id="pnLFuncExcluir" columns="2">
 					<h:outputText value="Código:"></h:outputText>
-					<h:outputText value="#{MBCliente.cliente.idCLIENTE}"></h:outputText>
+					<h:outputText value="#{MBFuncionario.funcionario.idFUNC}"></h:outputText>
 
 					<h:outputText value="Nome:"></h:outputText>
-					<h:outputText value="#{MBCliente.cliente.nome}"></h:outputText>
+					<h:outputText value="#{MBFuncionario.funcionario.nome}"></h:outputText>
 
 				</h:panelGrid>
 				<h:panelGrid>
 					<p:commandButton value="Confirmar"
-						actionListener="#{MBCliente.excluir}"
-						oncomplete="PF('CliExcluir').hide();"
-						update=":frmCliListagem:tblClientes"></p:commandButton>
+						actionListener="#{MBFuncionario.excluir}"
+						oncomplete="PF('FuncExcluir').hide();"
+						update=":frmFuncListagem:tblFuncionarios"></p:commandButton>
 					<p:commandButton value="Cancelar"
-						onclick="PF('CliExcluir').hide();"></p:commandButton>
+						onclick="PF('FuncExcluir').hide();"></p:commandButton>
 				</h:panelGrid>
 			</h:form>
 

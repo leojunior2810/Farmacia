@@ -67,9 +67,10 @@
 			</p:column>
 			
 			<p:column headerText="Opções">
-				<p:commandButton value="Excluir" actionListener="#{MBFabricante.prepararExcluir}" oncomplete="PF('FabExcluir').show();" update=":frmFabExcluir:pnLFabExcluir" />
+				<p:commandButton icon="ui-icon-trash" actionListener="#{MBFabricante.prepararExcluir}" oncomplete="PF('FabExcluir').show();" update=":frmFabExcluir:pnLFabExcluir" />
+				<p:commandButton icon="ui-icon-pencil" actionListener="#{MBFabricante.prepararAlterar}" oncomplete="PF('FabEditar').show();" update=":frmFabEditar:pnLFabEditar"></p:commandButton>
 			</p:column>
-			prepararExcluir
+			
 			<f:facet name="footer">
 				<p:commandButton value="Novo" actionListener="#{MBFabricante.prepararNovo}" oncomplete="PF('FabNovo').show();" update=":frmFabNovo:pnLFabNovo"></p:commandButton>
 			</f:facet>
@@ -128,6 +129,46 @@
 			</h:panelGrid>
 		</h:form>
 	
+	</p:dialog>
+
+	<p:dialog widgetVar="FabEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Fabricante - Alterar">
+		<h:form id="frmFabEditar">
+			<h:panelGrid id="pnLFabEditar" columns="2">
+				<p:outputLabel value="Código:"></p:outputLabel>
+				<h:outputText value="#{MBFabricante.fabricante.idFABRI}"></h:outputText>
+				<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.nome}"></p:inputText>
+					<p:outputLabel value="Cnpj"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.cnpj}"></p:inputText>
+					<p:outputLabel value="Telefone"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.tel}"></p:inputText>
+					<p:outputLabel value="Endereço"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.endereco}"></p:inputText>
+					<p:outputLabel value="Número"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.numero}"></p:inputText>
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.cidade}"></p:inputText>
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.complemento}"></p:inputText>
+					<p:outputLabel value="Bairro"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.bairro}"></p:inputText>
+					<p:outputLabel value="Cep"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.cep}"></p:inputText>
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.uf}"></p:inputText>
+					<p:outputLabel value="Email"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.email}"></p:inputText>
+					<p:outputLabel value="Obs"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.obs}"></p:inputText>
+					<p:outputLabel value="Site"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFabricante.fabricante.site}"></p:inputText>
+			</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Alterar" actionListener="#{MBFabricante.alterar}" oncomplete="PF('FabEditar').hide();" update=":frmFabListagem:tblFabricantes"></p:commandButton>
+					<p:commandButton value="Cancelar" onclick="PF('FabEditar').hide();"></p:commandButton>
+				</h:panelGrid>
+		</h:form>
+		
 	</p:dialog>
 	
 	</ui:define>
