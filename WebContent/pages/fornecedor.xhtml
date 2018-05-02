@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/index.xhtml">
+
+
+	<ui:define name="menu">
+		<ui:include src="/componentes/menuPrincipal.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmForListagem">
+		<p:dataTable id="tblFornecedores" emptyMessage="Nenhum registro encontrado."
+									value="#{MBFornecedor.itens}"
+									var="item"
+									paginator="true"
+									rows="4">
+			<f:facet name="header">
+				Fornecedor - Listagem
+			</f:facet>
+									
+			<p:column headerText="Código" sortBy="#{item.idFORNE}">
+				<h:outputText value="#{item.idFORNE}" />
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputText value="#{item.nome}" />
+			</p:column>
+			<p:column headerText="Cnpj">
+				<h:outputText value="#{item.cnpj}" />
+			</p:column>
+			<p:column headerText="Telefone">
+				<h:outputText value="#{item.tel}" />
+			</p:column>
+			<p:column headerText="Endereço">
+				<h:outputText value="#{item.endereco}" />
+			</p:column>
+			<p:column headerText="Número">
+				<h:outputText value="#{item.numero}" />
+			</p:column>
+			<p:column headerText="Cidade">
+				<h:outputText value="#{item.cidade}" />
+			</p:column>
+			<p:column headerText="Complemento">
+				<h:outputText value="#{item.complemento}" />
+			</p:column>
+			<p:column headerText="Bairro">
+				<h:outputText value="#{item.bairro}" />
+			</p:column>
+			<p:column headerText="Cep">
+				<h:outputText value="#{item.cep}" />
+			</p:column>
+			<p:column headerText="UF">
+				<h:outputText value="#{item.uf}" />
+			</p:column>
+			<p:column headerText="Email">
+				<h:outputText value="#{item.email}" />
+			</p:column>
+			<p:column headerText="Obs">
+				<h:outputText value="#{item.obs}" />
+			</p:column>
+			<p:column headerText="Site">
+				<h:outputText value="#{item.site}" />
+			</p:column>
+			
+			<p:column headerText="Opções">
+				<p:commandButton icon="ui-icon-trash" actionListener="#{MBFornecedor.prepararExcluir}" oncomplete="PF('ForExcluir').show();" update=":frmForExcluir:pnLForExcluir" />
+				<p:commandButton icon="ui-icon-pencil" actionListener="#{MBFornecedor.prepararAlterar}" oncomplete="PF('ForEditar').show();" update=":frmForEditar:pnLForEditar"></p:commandButton>
+			</p:column>
+			
+			<f:facet name="footer">
+				<p:commandButton value="Novo" actionListener="#{MBFornecedor.prepararNovo}" oncomplete="PF('ForNovo').show();" update=":frmForNovo:pnLForNovo"></p:commandButton>
+			</f:facet>
+		</p:dataTable>
+		</h:form>
+		<p:dialog widgetVar="ForNovo" closeble="false" draggable="false" resizable="false" header="Novo Fornecedor" modal="true" appendTo="@(body)">
+			<h:form id="frmForNovo">
+				<h:panelGrid id="pnLForNovo" columns="2">
+					<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.nome}"></p:inputText>
+					<p:outputLabel value="Cnpj"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.cnpj}"></p:inputText>
+					<p:outputLabel value="Telefone"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.tel}"></p:inputText>
+					<p:outputLabel value="Endereço"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.endereco}"></p:inputText>
+					<p:outputLabel value="Número"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.numero}"></p:inputText>
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.cidade}"></p:inputText>
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.complemento}"></p:inputText>
+					<p:outputLabel value="Bairro"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.bairro}"></p:inputText>
+					<p:outputLabel value="Cep"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.cep}"></p:inputText>
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.uf}"></p:inputText>
+					<p:outputLabel value="Email"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.email}"></p:inputText>
+					<p:outputLabel value="Obs"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.obs}"></p:inputText>
+					<p:outputLabel value="Site"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.site}"></p:inputText>
+				</h:panelGrid>
+					<h:panelGrid columns="2">
+						<p:commandButton value="Gravar" actionListener="#{MBFornecedor.novo}" oncomplete="PF('ForNovo').hide();" update=":frmForListagem:tblFornecedores"></p:commandButton>
+						<p:commandButton value="Fechar" onclick="PF('ForNovo').hide();"></p:commandButton>
+					</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	
+	<p:dialog widgetVar="ForExcluir" closable="false" draggable="false" resizable="false" modal="true" appendTo="@(body)" header="Fornecedor - Excluir">
+		<h:form id="frmForExcluir">
+			<h:panelGrid id="pnLForExcluir" columns="2">
+				<h:outputText value="Código:"></h:outputText>
+				<h:outputText value="#{MBFornecedor.fornecedor.idFORNE}"></h:outputText>
+				
+				<h:outputText value="Nome:"></h:outputText>
+				<h:outputText value="#{MBFornecedor.fornecedor.nome}"></h:outputText>
+				
+			</h:panelGrid>
+			<h:panelGrid>
+				<p:commandButton value="Confirmar" actionListener="#{MBFornecedor.excluir}" oncomplete="PF('ForExcluir').hide();" update=":frmForListagem:tblFornecedores"></p:commandButton>
+				<p:commandButton value="Cancelar" onclick="PF('ForExcluir').hide();"></p:commandButton>
+			</h:panelGrid>
+		</h:form>
+	
+	</p:dialog>
+
+	<p:dialog widgetVar="ForEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Fornecedor - Alterar">
+		<h:form id="frmForEditar">
+			<h:panelGrid id="pnLForEditar" columns="2">
+				<p:outputLabel value="Código:"></p:outputLabel>
+				<h:outputText value="#{MBFornecedor.fornecedor.idFORNE}"></h:outputText>
+				<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.nome}"></p:inputText>
+					<p:outputLabel value="Cnpj"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.cnpj}"></p:inputText>
+					<p:outputLabel value="Telefone"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.tel}"></p:inputText>
+					<p:outputLabel value="Endereço"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.endereco}"></p:inputText>
+					<p:outputLabel value="Número"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.numero}"></p:inputText>
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.cidade}"></p:inputText>
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.complemento}"></p:inputText>
+					<p:outputLabel value="Bairro"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.bairro}"></p:inputText>
+					<p:outputLabel value="Cep"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.cep}"></p:inputText>
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.uf}"></p:inputText>
+					<p:outputLabel value="Email"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.email}"></p:inputText>
+					<p:outputLabel value="Obs"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.obs}"></p:inputText>
+					<p:outputLabel value="Site"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFornecedor.fornecedor.site}"></p:inputText>
+			</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Alterar" actionListener="#{MBFornecedor.alterar}" oncomplete="PF('ForEditar').hide();" update=":frmForListagem:tblFornecedores"></p:commandButton>
+					<p:commandButton value="Cancelar" onclick="PF('ForEditar').hide();"></p:commandButton>
+				</h:panelGrid>
+		</h:form>
+		
+	</p:dialog>
+	
+	</ui:define>
+	
+</ui:composition>

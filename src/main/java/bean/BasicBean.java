@@ -10,4 +10,10 @@ public abstract class BasicBean {
 	
 	public abstract void alterar();
 	
+	public abstract void prepararNovo();
+	
+	public abstract void prepararExcluir();
+	
+	public abstract void prepararAlterar();
+	
 }

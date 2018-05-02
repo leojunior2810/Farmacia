@@ -74,10 +74,11 @@
 				</p:column>
 
 				<p:column headerText="Opções">
-					<p:commandButton value="Excluir"
+					<p:commandButton icon="ui-icon-trash"
 						actionListener="#{MBFuncionario.prepararExcluir}"
 						oncomplete="PF('FuncExcluir').show();"
 						update=":frmFuncExcluir:pnLFuncExcluir" />
+						<p:commandButton icon="ui-icon-pencil" actionListener="#{MBFuncionario.prepararAlterar}" oncomplete="PF('FuncEditar').show();" update=":frmFuncEditar:pnLFuncEditar"></p:commandButton>
 				</p:column>
 			
 			<f:facet name="footer">
@@ -160,6 +161,56 @@
 			</h:form>
 
 		</p:dialog>
+
+	<p:dialog widgetVar="FuncEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Funcionario - Alterar">
+		<h:form id="frmFuncEditar">
+			<h:panelGrid id="pnLFuncEditar" columns="2">
+				<p:outputLabel value="Código:"></p:outputLabel>
+				<h:outputText value="#{MBFuncionario.funcionario.idFUNC}"></h:outputText>
+				<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.nome}"></p:inputText>
+					<p:outputLabel value="CPF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.cpf}"></p:inputText>
+					<p:outputLabel value="RG"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.rg}"></p:inputText>
+					<p:outputLabel value="Usuário"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.usuario}"></p:inputText>
+					<p:outputLabel value="Senha"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.senha}"></p:inputText>
+					<p:outputLabel value="Endereço"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.endereco}"></p:inputText>
+					<p:outputLabel value="NúmeroCasa"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.numCasa}"></p:inputText>
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.complemento}"></p:inputText>
+					<p:outputLabel value="Bairro"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.bairro}"></p:inputText>
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.cidade}"></p:inputText>
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.uf}"></p:inputText>
+					<p:outputLabel value="CEP"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.cep}"></p:inputText>
+					<p:outputLabel value="DataCadastro"></p:outputLabel>
+					<p:inputText value="#{MBFuncionario.funcionario.dtaCadastro}"></p:inputText>
+					<p:outputLabel value="Telefone"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.tel}"></p:inputText>
+					<p:outputLabel value="Celular"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.cel}"></p:inputText>
+					<p:outputLabel value="Sexo"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.sexo}"></p:inputText>
+					<p:outputLabel value="Email"></p:outputLabel>
+					<p:inputText size="30" value="#{MBFuncionario.funcionario.email}"></p:inputText>
+			</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Alterar" actionListener="#{MBFuncionario.alterar}" oncomplete="PF('FuncEditar').hide();" update=":frmFuncListagem:tblFuncionarios"></p:commandButton>
+					<p:commandButton value="Cancelar" onclick="PF('FuncEditar').hide();"></p:commandButton>
+				</h:panelGrid>
+		</h:form>
+		
+	</p:dialog>
+	
+
 
 	</ui:define>
 

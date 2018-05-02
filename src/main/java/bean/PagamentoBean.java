@@ -49,10 +49,20 @@ public class PagamentoBean extends BasicBean {
 		}	
 	}
 
+	public void prepararNovo() {
+		pagamento = new Pagamento();
+	}
+	
+	public void prepararExcluir() {
+		pagamento = itens.getRowData();
+	}
+
+	public void prepararAlterar() {
+		pagamento = itens.getRowData();
+	}
 	
 	public void novo() {
 		try {
-			pagamento = new Pagamento();
 			PagamentoDAO dao = new PagamentoDAO();
 			dao.incluir(pagamento);
 
@@ -66,8 +76,6 @@ public class PagamentoBean extends BasicBean {
 	
 	public void excluir() {
 		try {
-			pagamento = itens.getRowData();
-
 			PagamentoDAO dao = new PagamentoDAO();
 			dao.deletar(pagamento);
 
@@ -82,7 +90,6 @@ public class PagamentoBean extends BasicBean {
 	
 	public void alterar() {
 		try {
-			pagamento = itens.getRowData();
 			PagamentoDAO dao = new PagamentoDAO();
 			dao.editar(pagamento);
 

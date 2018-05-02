@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/index.xhtml">
+
+
+	<ui:define name="menu">
+		<ui:include src="/componentes/menuPrincipal.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmProdListagem">
+		<p:dataTable id="tblProdutos" emptyMessage="Nenhum registro encontrado."
+									value="#{MBProduto.itens}"
+									var="item"
+									paginator="true"
+									rows="4">
+			<f:facet name="header">
+				Produto - Listagem
+			</f:facet>
+									
+			<p:column headerText="Código" sortBy="#{item.idPROD}">
+				<h:outputText value="#{item.idPROD}" />
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputText value="#{item.nome}" />
+			</p:column>
+			<p:column headerText="DataProduto">
+				<h:outputText value="#{item.dataProd}" />
+			</p:column>
+			<p:column headerText="Descrição">
+				<h:outputText value="#{item.descricao}" />
+			</p:column>
+			<p:column headerText="Quantidade">
+				<h:outputText value="#{item.qtde}" />
+			</p:column>
+			<p:column headerText="ValorUnitário">
+				<h:outputText value="#{item.valorUni}" />
+			</p:column>
+			<p:column headerText="ValorFinal">
+				<h:outputText value="#{item.valorFinal}" />
+			</p:column>
+			<p:column headerText="Observações">
+				<h:outputText value="#{item.obs}" />
+			</p:column>
+			<p:column headerText="Origem">
+				<h:outputText value="#{item.origem}" />
+			</p:column>
+			<p:column headerText="Bula">
+				<h:outputText value="#{item.bula}" />
+			</p:column>
+			<p:column headerText="Opções">
+				<p:commandButton icon="ui-icon-trash" actionListener="#{MBProduto.prepararExcluir}" oncomplete="PF('ProdExcluir').show();" update=":frmProdExcluir:pnLProdExcluir" />
+				<p:commandButton icon="ui-icon-pencil" actionListener="#{MBProduto.prepararAlterar}" oncomplete="PF('ProdEditar').show();" update=":frmProdEditar:pnLProdEditar"></p:commandButton>
+			</p:column>
+			
+			<f:facet name="footer">
+				<p:commandButton value="Novo" actionListener="#{MBProduto.prepararNovo}" oncomplete="PF('ProdNovo').show();" update=":frmProdNovo:pnLProdNovo"></p:commandButton>
+			</f:facet>
+		</p:dataTable>
+		</h:form>
+		<p:dialog widgetVar="ProdNovo" closeble="false" draggable="false" resizable="false" header="Novo Produto" modal="true" appendTo="@(body)">
+			<h:form id="frmProdNovo">
+				<h:panelGrid id="pnLProdNovo" columns="2">
+					<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.nome}"></p:inputText>
+					<p:outputLabel value="DataProduto"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.dataProd}"></p:inputText>
+					<p:outputLabel value="Descrição"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.descricao}"></p:inputText>
+					<p:outputLabel value="Quantidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.qtde}"></p:inputText>
+					<p:outputLabel value="ValorUnitário"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.valorUni}"></p:inputText>
+					<p:outputLabel value="ValorFinal"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.valorFinal}"></p:inputText>
+					<p:outputLabel value="Observações"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.obs}"></p:inputText>
+					<p:outputLabel value="Origem"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.origem}"></p:inputText>
+					<p:outputLabel value="Bula"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.bula}"></p:inputText>
+				</h:panelGrid>
+					<h:panelGrid columns="2">
+						<p:commandButton value="Gravar" actionListener="#{MBProduto.novo}" oncomplete="PF('ProdNovo').hide();" update=":frmProdListagem:tblProdutos"></p:commandButton>
+						<p:commandButton value="Fechar" onclick="PF('ProdNovo').hide();"></p:commandButton>
+					</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	
+	<p:dialog widgetVar="ProdExcluir" closable="false" draggable="false" resizable="false" modal="true" appendTo="@(body)" header="Produto - Excluir">
+		<h:form id="frmProdExcluir">
+			<h:panelGrid id="pnLProdExcluir" columns="2">
+				<h:outputText value="Código:"></h:outputText>
+				<h:outputText value="#{MBProduto.produto.idPROD}"></h:outputText>
+				
+				<h:outputText value="Nome:"></h:outputText>
+				<h:outputText value="#{MBProduto.produto.nome}"></h:outputText>
+				
+			</h:panelGrid>
+			<h:panelGrid>
+				<p:commandButton value="Confirmar" actionListener="#{MBProduto.excluir}" oncomplete="PF('ProdExcluir').hide();" update=":frmProdListagem:tblProdutos"></p:commandButton>
+				<p:commandButton value="Cancelar" onclick="PF('ProdExcluir').hide();"></p:commandButton>
+			</h:panelGrid>
+		</h:form>
+	
+	</p:dialog>
+
+	<p:dialog widgetVar="ProdEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Produto - Alterar">
+		<h:form id="frmProdEditar">
+			<h:panelGrid id="pnLForEditar" columns="2">
+				<p:outputLabel value="Código:"></p:outputLabel>
+				<h:outputText value="#{MBProduto.produto.idPROD}"></h:outputText>
+				<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.nome}"></p:inputText>
+					<p:outputLabel value="DataProduto"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.dataProd}"></p:inputText>
+					<p:outputLabel value="Descrição"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.descricao}"></p:inputText>
+					<p:outputLabel value="Quantidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.qtde}"></p:inputText>
+					<p:outputLabel value="ValorUnitário"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.valorUni}"></p:inputText>
+					<p:outputLabel value="ValorFinal"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.valorFinal}"></p:inputText>
+					<p:outputLabel value="Observações"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.obs}"></p:inputText>
+					<p:outputLabel value="Origem"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.origem}"></p:inputText>
+					<p:outputLabel value="Bula"></p:outputLabel>
+					<p:inputText size="30" value="#{MBProduto.produto.bula}"></p:inputText>
+			</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Alterar" actionListener="#{MBProduto.alterar}" oncomplete="PF('ProdEditar').hide();" update=":frmProdListagem:tblProdutos"></p:commandButton>
+					<p:commandButton value="Cancelar" onclick="PF('ProdEditar').hide();"></p:commandButton>
+				</h:panelGrid>
+		</h:form>
+		
+	</p:dialog>
+	
+	</ui:define>
+	
+</ui:composition>

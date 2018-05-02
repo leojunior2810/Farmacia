@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/index.xhtml">
+
+
+	<ui:define name="menu">
+		<ui:include src="/componentes/menuPrincipal.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmPagListagem">
+		<p:dataTable id="tblPagamentos" emptyMessage="Nenhum registro encontrado."
+									value="#{MBPagamento.itens}"
+									var="item"
+									paginator="true"
+									rows="4">
+			<f:facet name="header">
+				Pagamento - Listagem
+			</f:facet>
+									
+			<p:column headerText="Código" sortBy="#{item.idPAG}">
+				<h:outputText value="#{item.idPAG}" />
+			</p:column>
+			<p:column headerText="Nome">
+				<h:outputText value="#{item.nome}" />
+			</p:column>
+			<p:column headerText="ValorTotal">
+				<h:outputText value="#{item.valorTotal}" />
+			</p:column>
+			<p:column headerText="DataVenda">
+				<h:outputText value="#{item.dtVenda}" />
+			</p:column>
+			<p:column headerText="TipoPagamento">
+				<h:outputText value="#{item.tipoPagamento}" />
+			</p:column>
+			<p:column headerText="Observações">
+				<h:outputText value="#{item.obs}" />
+			</p:column>
+			<p:column headerText="NúmeroCheque">
+				<h:outputText value="#{item.nCheque}" />
+			</p:column>
+			<p:column headerText="NúmeroCartão">
+				<h:outputText value="#{item.nCartao}" />
+			</p:column>
+			<p:column headerText="Opções">
+				<p:commandButton icon="ui-icon-trash" actionListener="#{MBPagamento.prepararExcluir}" oncomplete="PF('PagExcluir').show();" update=":frmPagExcluir:pnLPagExcluir" />
+				<p:commandButton icon="ui-icon-pencil" actionListener="#{MBPagamento.prepararAlterar}" oncomplete="PF('PagEditar').show();" update=":frmPagEditar:pnLPagEditar"></p:commandButton>
+			</p:column>
+			
+			<f:facet name="footer">
+				<p:commandButton value="Novo" actionListener="#{MBPagamento.prepararNovo}" oncomplete="PF('PagNovo').show();" update=":frmPagNovo:pnLPagNovo"></p:commandButton>
+			</f:facet>
+		</p:dataTable>
+		</h:form>
+		<p:dialog widgetVar="PagNovo" closeble="false" draggable="false" resizable="false" header="Novo Pagamento" modal="true" appendTo="@(body)">
+			<h:form id="frmPagNovo">
+				<h:panelGrid id="pnLPagNovo" columns="2">
+					<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.nome}"></p:inputText>
+					<p:outputLabel value="ValorTotal"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.valorTotal}"></p:inputText>
+					<p:outputLabel value="DataVenda"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.dtVenda}"></p:inputText>
+					<p:outputLabel value="TipoPagamento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.tipoPagamento}"></p:inputText>
+					<p:outputLabel value="Observações"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.obs}"></p:inputText>
+					<p:outputLabel value="NúmeroCheque"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.nCheque}"></p:inputText>
+					<p:outputLabel value="NúmeroCartão"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.nCartao}"></p:inputText>
+				</h:panelGrid>
+					<h:panelGrid columns="2">
+						<p:commandButton value="Gravar" actionListener="#{MBPagamento.novo}" oncomplete="PF('PagNovo').hide();" update=":frmPagListagem:tblPagamentos"></p:commandButton>
+						<p:commandButton value="Fechar" onclick="PF('PagNovo').hide();"></p:commandButton>
+					</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	
+	<p:dialog widgetVar="PagExcluir" closable="false" draggable="false" resizable="false" modal="true" appendTo="@(body)" header="Pagamento - Excluir">
+		<h:form id="frmPagExcluir">
+			<h:panelGrid id="pnLPagExcluir" columns="2">
+				<h:outputText value="Código:"></h:outputText>
+				<h:outputText value="#{MBPagamento.pagamento.idPAG}"></h:outputText>
+				
+				<h:outputText value="Nome:"></h:outputText>
+				<h:outputText value="#{MBPagamento.pagamento.nome}"></h:outputText>
+				
+			</h:panelGrid>
+			<h:panelGrid>
+				<p:commandButton value="Confirmar" actionListener="#{MBPagamento.excluir}" oncomplete="PF('pagExcluir').hide();" update=":frmPagListagem:tblPagamentos"></p:commandButton>
+				<p:commandButton value="Cancelar" onclick="PF('PagExcluir').hide();"></p:commandButton>
+			</h:panelGrid>
+		</h:form>
+	
+	</p:dialog>
+
+	<p:dialog widgetVar="PagEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Pagamento - Alterar">
+		<h:form id="frmPagEditar">
+			<h:panelGrid id="pnLPagEditar" columns="2">
+				<p:outputLabel value="Código:"></p:outputLabel>
+				<h:outputText value="#{MBPagamento.pagamento.idPAG}"></h:outputText>
+				<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.nome}"></p:inputText>
+					<p:outputLabel value="ValorTotal"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.valorTotal}"></p:inputText>
+					<p:outputLabel value="DataVenda"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.dtVenda}"></p:inputText>
+					<p:outputLabel value="TipoPagamento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.tipoPagamento}"></p:inputText>
+					<p:outputLabel value="Observações"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.obs}"></p:inputText>
+					<p:outputLabel value="NúmeroCheque"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.nCheque}"></p:inputText>
+					<p:outputLabel value="NúmeroCartão"></p:outputLabel>
+					<p:inputText size="30" value="#{MBPagamento.pagamento.nCartao}"></p:inputText>
+			</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Alterar" actionListener="#{MBPagamento.alterar}" oncomplete="PF('PagEditar').hide();" update=":frmPagListagem:tblPagamentos"></p:commandButton>
+					<p:commandButton value="Cancelar" onclick="PF('PagEditar').hide();"></p:commandButton>
+				</h:panelGrid>
+		</h:form>
+		
+	</p:dialog>
+	
+	</ui:define>
+	
+</ui:composition>

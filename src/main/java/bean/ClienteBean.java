@@ -61,6 +61,10 @@ public class ClienteBean extends BasicBean {
 		cliente = itens.getRowData();
 	}
 	
+	public void prepararAlterar() {
+		cliente = itens.getRowData();
+	}
+	
 
 	public void novo() {
 		try {
@@ -93,7 +97,6 @@ public class ClienteBean extends BasicBean {
 
 	public void alterar() {
 		try {
-			cliente = itens.getRowData();
 			ClienteDAO dao = new ClienteDAO();
 			dao.editar(cliente);
 

@@ -82,10 +82,11 @@
 				</p:column>
 
 				<p:column headerText="Opções">
-					<p:commandButton value="Excluir"
+					<p:commandButton icon="ui-icon-trash"
 						actionListener="#{MBCliente.prepararExcluir}"
 						oncomplete="PF('CliExcluir').show();"
 						update=":frmCliExcluir:pnLCliExcluir" />
+					<p:commandButton icon="ui-icon-pencil" actionListener="#{MBCliente.prepararAlterar}" oncomplete="PF('CliEditar').show();" update=":frmCliEditar:pnLCliEditar"></p:commandButton>	
 				</p:column>
 			
 			<f:facet name="footer">
@@ -168,6 +169,53 @@
 			</h:form>
 
 		</p:dialog>
+		
+		<p:dialog widgetVar="CliEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Fabricante - Alterar">
+		<h:form id="frmCliEditar">
+			<h:panelGrid id="pnLCliEditar" columns="2">
+				<p:outputLabel value="Código:"></p:outputLabel>
+				<h:outputText value="#{MBCliente.cliente.idCLIENTE}"></h:outputText>
+				<p:outputLabel value="Nome"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.nome}"></p:inputText>
+					<p:outputLabel value="CPF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.cpf}"></p:inputText>
+					<p:outputLabel value="Rg"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.rg}"></p:inputText>
+					<p:outputLabel value="Telefone"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.tel}"></p:inputText>
+					<p:outputLabel value="Celular"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.cel}"></p:inputText>
+					<p:outputLabel value="Endereço"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.endereco}"></p:inputText>
+					<p:outputLabel value="NúmeroCasa"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.numCasa}"></p:inputText>
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.complemento}"></p:inputText>
+					<p:outputLabel value="Bairro"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.bairro}"></p:inputText>
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.cidade}"></p:inputText>
+					<p:outputLabel value="Cep"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.cep}"></p:inputText>
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.uf}"></p:inputText>
+					<p:outputLabel value="Sexo"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.sexo}"></p:inputText>
+					<p:outputLabel value="Email"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.email}"></p:inputText>
+					<p:outputLabel value="EstadoCivil"></p:outputLabel>
+					<p:inputText size="30" value="#{MBCliente.cliente.estadoCivil}"></p:inputText>
+			</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Alterar" actionListener="#{MBCliente.alterar}" oncomplete="PF('FabEditar').hide();" update=":frmCliListagem:tblClientes"></p:commandButton>
+					<p:commandButton value="Cancelar" onclick="PF('CliEditar').hide();"></p:commandButton>
+				</h:panelGrid>
+		</h:form>
+		
+	</p:dialog>
+	
+		
+		
 
 	</ui:define>
 

@@ -50,10 +50,21 @@ public class ProdutoBean extends BasicBean {
 		}	
 	}
 
+	public void prepararNovo() {
+		produto = new Produto();
+	}
+	
+	public void prepararExcluir() {
+		produto = itens.getRowData();
+	}
 
+	public void prepararAlterar() {
+		produto = itens.getRowData();
+	}
+	
+	
 	public void novo() {
 		try {
-			produto = new Produto();
 			ProdutoDAO dao = new ProdutoDAO();
 			dao.incluir(produto);
 
@@ -67,8 +78,6 @@ public class ProdutoBean extends BasicBean {
 
 	public void excluir() {
 		try {
-			produto = itens.getRowData();
-
 			ProdutoDAO dao = new ProdutoDAO();
 			dao.deletar(produto);
 
@@ -83,7 +92,6 @@ public class ProdutoBean extends BasicBean {
 
 	public void alterar() {
 		try {
-			produto = itens.getRowData();
 			ProdutoDAO dao = new ProdutoDAO();
 			dao.editar(produto);
 

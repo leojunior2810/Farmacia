@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/index.xhtml">
+
+
+	<ui:define name="menu">
+		<ui:include src="/componentes/menuPrincipal.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmItemListagem">
+		<p:dataTable id="tblItens" emptyMessage="Nenhum registro encontrado."
+									value="#{MBItem.itens}"
+									var="item"
+									paginator="true"
+									rows="4">
+			<f:facet name="header">
+				Item - Listagem
+			</f:facet>
+									
+			<p:column headerText="Código" sortBy="#{item.idITEM_VENDA}">
+				<h:outputText value="#{item.idITEM_VENDA}" />
+			</p:column>
+			<p:column headerText="Quantidade">
+				<h:outputText value="#{item.qtde}" />
+			</p:column>
+			<p:column headerText="ValorUnitário">
+				<h:outputText value="#{item.valorUni}" />
+			</p:column>
+			<p:column headerText="Desconto">
+				<h:outputText value="#{item.desconto}" />
+			</p:column>
+			<p:column headerText="Observações">
+				<h:outputText value="#{item.obs}" />
+			</p:column>
+			
+			<p:column headerText="Opções">
+				<p:commandButton icon="ui-icon-trash" actionListener="#{MBItem.prepararExcluir}" oncomplete="PF('ItemExcluir').show();" update=":frmItemExcluir:pnLItemExcluir" />
+				<p:commandButton icon="ui-icon-pencil" actionListener="#{MBItem.prepararAlterar}" oncomplete="PF('ItemEditar').show();" update=":frmItemEditar:pnLItemEditar"></p:commandButton>
+			</p:column>
+			
+			<f:facet name="footer">
+				<p:commandButton value="Novo" actionListener="#{MBItem.prepararNovo}" oncomplete="PF('ItemNovo').show();" update=":frmItemNovo:pnLItemNovo"></p:commandButton>
+			</f:facet>
+		</p:dataTable>
+		</h:form>
+		<p:dialog widgetVar="ItemNovo" closeble="false" draggable="false" resizable="false" header="Novo Item" modal="true" appendTo="@(body)">
+			<h:form id="frmItemNovo">
+				<h:panelGrid id="pnLItemNovo" columns="2">
+					<p:outputLabel value="Quantidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBItem.itemVenda.qtde}"></p:inputText>
+					<p:outputLabel value="ValorUnitário"></p:outputLabel>
+					<p:inputText size="30" value="#{MBItem.itemVenda.valorUni}"></p:inputText>
+					<p:outputLabel value="Desconto"></p:outputLabel>
+					<p:inputText size="30" value="#{MBItem.itemVenda.desconto}"></p:inputText>
+					<p:outputLabel value="Observações"></p:outputLabel>
+					<p:inputText size="30" value="#{MBItem.itemVenda.obs}"></p:inputText>
+				</h:panelGrid>
+					<h:panelGrid columns="2">
+						<p:commandButton value="Gravar" actionListener="#{MBItem.novo}" oncomplete="PF('ItemNovo').hide();" update=":frmItemListagem:tblItens"></p:commandButton>
+						<p:commandButton value="Fechar" onclick="PF('ItemNovo').hide();"></p:commandButton>
+					</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	
+	<p:dialog widgetVar="ItemExcluir" closable="false" draggable="false" resizable="false" modal="true" appendTo="@(body)" header="Item - Excluir">
+		<h:form id="frmItemExcluir">
+			<h:panelGrid id="pnLItemExcluir" columns="2">
+				<h:outputText value="Código:"></h:outputText>
+				<h:outputText value="#{MBItem.itemVenda.idITEM_VENDA}"></h:outputText>
+				
+			</h:panelGrid>
+			<h:panelGrid>
+				<p:commandButton value="Confirmar" actionListener="#{MBItem.excluir}" oncomplete="PF('ItemExcluir').hide();" update=":frmItemListagem:tblItens"></p:commandButton>
+				<p:commandButton value="Cancelar" onclick="PF('ItemExcluir').hide();"></p:commandButton>
+			</h:panelGrid>
+		</h:form>
+	
+	</p:dialog>
+
+	<p:dialog widgetVar="ItemEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Item - Alterar">
+		<h:form id="frmItemEditar">
+			<h:panelGrid id="pnLItemEditar" columns="2">
+				<p:outputLabel value="Código:"></p:outputLabel>
+				<h:outputText value="#{MBItem.itemVenda.idITEM_VENDA}"></h:outputText>
+				<p:outputLabel value="Quantidade"></p:outputLabel>
+					<p:inputText size="30" value="#{MBItem.itemVenda.qtde}"></p:inputText>
+					<p:outputLabel value="ValorUnitário"></p:outputLabel>
+					<p:inputText size="30" value="#{MBItem.itemVenda.valorUni}"></p:inputText>
+					<p:outputLabel value="Desconto"></p:outputLabel>
+					<p:inputText size="30" value="#{MBItem.itemVenda.desconto}"></p:inputText>
+					<p:outputLabel value="Observações"></p:outputLabel>
+					<p:inputText size="30" value="#{MBItem.itemVenda.obs}"></p:inputText>
+			</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Alterar" actionListener="#{MBItem.alterar}" oncomplete="PF('ItemEditar').hide();" update=":frmItemListagem:tblItens"></p:commandButton>
+					<p:commandButton value="Cancelar" onclick="PF('ItemEditar').hide();"></p:commandButton>
+				</h:panelGrid>
+		</h:form>
+		
+	</p:dialog>
+	
+	</ui:define>
+	
+</ui:composition>

@@ -50,10 +50,21 @@ public class FornecedorBean extends BasicBean {
 		}	
 	}
 
+	public void prepararNovo() {
+		fornecedor = new Fornecedor();
+	}
+	
+	public void prepararExcluir() {
+		fornecedor = itens.getRowData();
+	}
 
+	public void prepararAlterar() {
+		fornecedor = itens.getRowData();
+	}
+	
+	
 	public void novo() {
 		try {
-			fornecedor = new Fornecedor();
 			FornecedorDAO dao = new FornecedorDAO();
 			dao.incluir(fornecedor);
 
@@ -67,8 +78,6 @@ public class FornecedorBean extends BasicBean {
 
 	public void excluir() {
 		try {
-			fornecedor = itens.getRowData();
-
 			FornecedorDAO dao = new FornecedorDAO();
 			dao.deletar(fornecedor);
 
@@ -83,7 +92,6 @@ public class FornecedorBean extends BasicBean {
 
 	public void alterar() {
 		try {
-			fornecedor = itens.getRowData();
 			FornecedorDAO dao = new FornecedorDAO();
 			dao.editar(fornecedor);
 

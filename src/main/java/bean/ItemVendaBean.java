@@ -50,11 +50,21 @@ public class ItemVendaBean extends BasicBean {
 		}	
 	}
 
+	public void prepararNovo() {
+		itemVenda = new ItemVenda();
+	}
+	
+	public void prepararExcluir() {
+		itemVenda = itens.getRowData();
+	}
+
+	public void prepararAlterar() {
+		itemVenda = itens.getRowData();
+	}
 
 
 	public void novo() {
 		try {
-			itemVenda = new ItemVenda();
 			ItemVendaDAO dao = new ItemVendaDAO();
 			dao.incluir(itemVenda);
 
@@ -68,8 +78,6 @@ public class ItemVendaBean extends BasicBean {
 
 	public void excluir() {
 		try {
-			itemVenda = itens.getRowData();
-
 			ItemVendaDAO dao = new ItemVendaDAO();
 			dao.deletar(itemVenda);
 
@@ -84,7 +92,6 @@ public class ItemVendaBean extends BasicBean {
 
 	public void alterar() {
 		try {
-			itemVenda = itens.getRowData();
 			ItemVendaDAO dao = new ItemVendaDAO();
 			dao.editar(itemVenda);
 

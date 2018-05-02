@@ -47,10 +47,21 @@ public class FuncionarioBean extends BasicBean {
 		}	
 	}
 
+	public void prepararNovo() {
+		funcionario = new Funcionario();
+	}
+	
+	public void prepararExcluir() {
+		funcionario = itens.getRowData();
+	}
+
+	public void prepararAlterar() {
+		funcionario = itens.getRowData();
+	}
+	
 
 	public void novo() {
 		try {
-			funcionario = new Funcionario();
 			FuncionarioDAO dao = new FuncionarioDAO();
 			dao.incluir(funcionario);
 
@@ -64,8 +75,6 @@ public class FuncionarioBean extends BasicBean {
 
 	public void excluir() {
 		try {
-			funcionario = itens.getRowData();
-
 			FuncionarioDAO dao = new FuncionarioDAO();
 			dao.deletar(funcionario);
 
@@ -80,7 +89,6 @@ public class FuncionarioBean extends BasicBean {
 
 	public void alterar() {
 		try {
-			funcionario = itens.getRowData();
 			FuncionarioDAO dao = new FuncionarioDAO();
 			dao.editar(funcionario);
 
