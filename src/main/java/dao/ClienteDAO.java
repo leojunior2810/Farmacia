@@ -45,7 +45,7 @@ public class ClienteDAO extends BasicDAO {
 			pst.setString(13, c.getUf());
 			pst.setString(14, c.getSexo());
 			pst.setString(15, c.getEmail());
-			pst.setDate(16, c.getDtaCadastro());
+			pst.setDate(16, new Date(c.getDtaCadastro().getTime()));
 			pst.setString(17, c.getEstadoCivil());
 			pst.executeUpdate();
 			pst.close();
