@@ -2,6 +2,7 @@ package bean;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -17,6 +18,18 @@ public class ProdutoBean extends BasicBean {
 
 	private Produto produto;
 	private ListDataModel<Produto> itens;
+	private Date dataProduto = new Date();
+
+
+
+	public Date getDataProduto() {
+		return dataProduto;
+	}
+
+
+	public void setDataProduto(Date dataProduto) {
+		this.dataProduto = dataProduto;
+	}
 
 
 	public Produto getProduto() {
@@ -66,6 +79,7 @@ public class ProdutoBean extends BasicBean {
 	public void novo() {
 		try {
 			ProdutoDAO dao = new ProdutoDAO();
+			produto.setDataProd(new java.sql.Date(dataProduto.getTime()));
 			dao.incluir(produto);
 
 			ArrayList<Produto> lista = dao.listar();

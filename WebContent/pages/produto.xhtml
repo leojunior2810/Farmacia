@@ -69,7 +69,7 @@
 					<p:outputLabel value="Nome"></p:outputLabel>
 					<p:inputText size="30" value="#{MBProduto.produto.nome}"></p:inputText>
 					<p:outputLabel value="DataProduto"></p:outputLabel>
-					<p:inputText size="30" value="#{MBProduto.produto.dataProd}"></p:inputText>
+					<p:calendar  value="#{MBProduto.dataProduto}"></p:calendar>
 					<p:outputLabel value="Descrição"></p:outputLabel>
 					<p:inputText size="30" value="#{MBProduto.produto.descricao}"></p:inputText>
 					<p:outputLabel value="Quantidade"></p:outputLabel>
@@ -112,13 +112,11 @@
 
 	<p:dialog widgetVar="ProdEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Produto - Alterar">
 		<h:form id="frmProdEditar">
-			<h:panelGrid id="pnLForEditar" columns="2">
+			<h:panelGrid id="pnLProdEditar" columns="2">
 				<p:outputLabel value="Código:"></p:outputLabel>
 				<h:outputText value="#{MBProduto.produto.idPROD}"></h:outputText>
 				<p:outputLabel value="Nome"></p:outputLabel>
 					<p:inputText size="30" value="#{MBProduto.produto.nome}"></p:inputText>
-					<p:outputLabel value="DataProduto"></p:outputLabel>
-					<p:inputText size="30" value="#{MBProduto.produto.dataProd}"></p:inputText>
 					<p:outputLabel value="Descrição"></p:outputLabel>
 					<p:inputText size="30" value="#{MBProduto.produto.descricao}"></p:inputText>
 					<p:outputLabel value="Quantidade"></p:outputLabel>

@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class ProdutoDAO extends BasicDAO {
 
 			PreparedStatement pst =  conexao.prepareStatement(sql.toString());
 			pst.setString(1, p.getNome());
-			pst.setDate(2, p.getDataProd());
+			pst.setDate(2, new Date(p.getDataProd().getTime()));
 			pst.setString(3, p.getDescricao());
 			pst.setInt(4, p.getQtde());
 			pst.setDouble(5, p.getValorUni());
@@ -34,7 +35,7 @@ public class ProdutoDAO extends BasicDAO {
 			pst.setString(7, p.getObs());
 			pst.setString(8, p.getOrigem());
 			pst.setString(9, p.getBula());
-
+			
 			pst.executeUpdate();
 			pst.close();
 		}

@@ -2,6 +2,7 @@ package bean;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -19,6 +20,7 @@ import model.Cliente;
 public class ClienteBean extends BasicBean {
 	private Cliente cliente;
 	private ListDataModel<Cliente> itens;
+	private Date dataCadastro = new Date();
 
 
 	public Cliente getCliente() {
@@ -69,6 +71,7 @@ public class ClienteBean extends BasicBean {
 	public void novo() {
 		try {
 			ClienteDAO dao = new ClienteDAO();
+			cliente.setDtaCadastro(new java.sql.Date(dataCadastro.getTime()));
 			dao.incluir(cliente);
 
 			ArrayList<Cliente> lista = dao.listar();
@@ -108,5 +111,13 @@ public class ClienteBean extends BasicBean {
 	}
 
 
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
 
 }
