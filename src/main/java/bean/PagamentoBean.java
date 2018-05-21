@@ -2,6 +2,7 @@ package bean;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -17,8 +18,20 @@ public class PagamentoBean extends BasicBean {
 
 	private Pagamento pagamento;
 	private ListDataModel<Pagamento> itens;
+	private Date dtVenda = new Date();
 	
 	
+	
+	public Date getDtVenda() {
+		return dtVenda;
+	}
+
+
+	public void setDtVenda(Date dtVenda) {
+		this.dtVenda = dtVenda;
+	}
+
+
 	public Pagamento getPagamento() {
 		return pagamento;
 	}
@@ -64,6 +77,7 @@ public class PagamentoBean extends BasicBean {
 	public void novo() {
 		try {
 			PagamentoDAO dao = new PagamentoDAO();
+			pagamento.setDtVenda(new java.sql.Date(dtVenda.getTime()));
 			dao.incluir(pagamento);
 
 			ArrayList<Pagamento> lista = dao.listar();

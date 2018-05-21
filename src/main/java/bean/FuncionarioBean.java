@@ -2,6 +2,7 @@ package bean;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -18,7 +19,16 @@ public class FuncionarioBean extends BasicBean {
 
 	private Funcionario funcionario;
 	private ListDataModel<Funcionario> itens;
+	private Date dtaCadastro = new Date(); 
+	
+	
+	public Date getDtaCadastro() {
+		return dtaCadastro;
+	}
 
+	public void setDtaCadastro(Date dtaCadastro) {
+		this.dtaCadastro = dtaCadastro;
+	}
 
 	public Funcionario getFuncionario() {
 		return funcionario;
@@ -63,6 +73,7 @@ public class FuncionarioBean extends BasicBean {
 	public void novo() {
 		try {
 			FuncionarioDAO dao = new FuncionarioDAO();
+			funcionario.setDtaCadastro(new java.sql.Date(dtaCadastro.getTime()));
 			dao.incluir(funcionario);
 
 			ArrayList<Funcionario> lista = dao.listar();

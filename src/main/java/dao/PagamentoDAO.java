@@ -67,7 +67,7 @@ public class PagamentoDAO extends BasicDAO {
 		if(obj instanceof Pagamento) {
 			Pagamento p = (Pagamento) obj;
 
-			String sql = "UPDATE pagamento SET NomeCliente = ?, ValorTotal = ?, DtVenda = ?, TipoPagamento = ?, Obs = ?, NumeroCheque = ?, NumeroCartao = ? WHERE idFABRI = ? ";
+			String sql = "UPDATE pagamento SET NomeCliente = ?, ValorTotal = ?, DtVenda = ?, TipoPagamento = ?, Obs = ?, NumeroCheque = ?, NumeroCartao = ? WHERE idPAG = ? ";
 
 
 			Connection conexao = ConexaoFactory.conectar();
@@ -93,7 +93,7 @@ public class PagamentoDAO extends BasicDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * FROM ");
 		sql.append("pagamento ");
-		sql.append("ORDER BY nome ASC ");
+		sql.append("ORDER BY NomeCliente ASC ");
 
 		Connection conexao = ConexaoFactory.conectar();
 
