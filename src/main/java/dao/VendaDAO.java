@@ -93,7 +93,6 @@ public class VendaDAO extends BasicDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT * FROM ");
 		sql.append("venda ");
-		sql.append("ORDER BY nome ASC ");
 
 		Connection conexao = ConexaoFactory.conectar();
 

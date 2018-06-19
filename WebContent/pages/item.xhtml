@@ -7,51 +7,68 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/index.xhtml">
 
-
 	<ui:define name="menu">
 		<ui:include src="/componentes/menuPrincipal.xhtml"></ui:include>
 	</ui:define>
 
 	<ui:define name="conteudo">
 		<h:form id="frmItemListagem">
-		<p:dataTable id="tblItens" emptyMessage="Nenhum registro encontrado."
-									value="#{MBItem.itens}"
-									var="item"
-									paginator="true"
-									rows="4">
-			<f:facet name="header">
+			<p:dataTable id="tblItens" emptyMessage="Nenhum registro encontrado."
+				value="#{MBItem.itens}" var="item" paginator="true" rows="4">
+				<f:facet name="header">
 				Item - Listagem
 			</f:facet>
-									
-			<p:column headerText="Código" sortBy="#{item.idITEM_VENDA}">
-				<h:outputText value="#{item.idITEM_VENDA}" />
-			</p:column>
-			<p:column headerText="Quantidade">
-				<h:outputText value="#{item.qtde}" />
-			</p:column>
-			<p:column headerText="ValorUnitário">
-				<h:outputText value="#{item.valorUni}" />
-			</p:column>
-			<p:column headerText="Desconto">
-				<h:outputText value="#{item.desconto}" />
-			</p:column>
-			<p:column headerText="Observações">
-				<h:outputText value="#{item.obs}" />
-			</p:column>
-			
-			<p:column headerText="Opções">
-				<p:commandButton icon="ui-icon-trash" actionListener="#{MBItem.prepararExcluir}" oncomplete="PF('ItemExcluir').show();" update=":frmItemExcluir:pnLItemExcluir" />
-				<p:commandButton icon="ui-icon-pencil" actionListener="#{MBItem.prepararAlterar}" oncomplete="PF('ItemEditar').show();" update=":frmItemEditar:pnLItemEditar"></p:commandButton>
-			</p:column>
-			
-			<f:facet name="footer">
-				<p:commandButton value="Novo" actionListener="#{MBItem.prepararNovo}" oncomplete="PF('ItemNovo').show();" update=":frmItemNovo:pnLItemNovo"></p:commandButton>
-			</f:facet>
-		</p:dataTable>
+
+				<p:column headerText="Código" sortBy="#{item.idITEM_VENDA}">
+					<h:outputText value="#{item.idITEM_VENDA}" />
+				</p:column>
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{item.qtde}" />
+				</p:column>
+				<p:column headerText="ValorUnitário">
+					<h:outputText value="#{item.valorUni}" />
+				</p:column>
+				<p:column headerText="Desconto">
+					<h:outputText value="#{item.desconto}" />
+				</p:column>
+				<p:column headerText="Observações">
+					<h:outputText value="#{item.obs}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{MBItem.prepararExcluir}"
+						oncomplete="PF('ItemExcluir').show();"
+						update=":frmItemExcluir:pnLItemExcluir" />
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{MBItem.prepararAlterar}"
+						oncomplete="PF('ItemEditar').show();"
+						update=":frmItemEditar:pnLItemEditar"></p:commandButton>
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton value="Novo"
+						actionListener="#{MBItem.prepararNovo}"
+						oncomplete="PF('ItemNovo').show();"
+						update=":frmItemNovo:pnLItemNovo"></p:commandButton>
+				</f:facet>
+			</p:dataTable>
 		</h:form>
-		<p:dialog widgetVar="ItemNovo" closeble="false" draggable="false" resizable="false" header="Novo Item" modal="true" appendTo="@(body)">
+		<p:dialog widgetVar="ItemNovo" closeble="false" draggable="false"
+			resizable="false" header="Novo Item" modal="true" appendTo="@(body)">
 			<h:form id="frmItemNovo">
 				<h:panelGrid id="pnLItemNovo" columns="2">
+					<p:outputLabel value="Produto"></p:outputLabel>
+					<p:selectOneMenu id="produto" value="#{MBItem.itemVenda.idProduto}">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{MBItem.produtos}" var="p" itemLabel="#{p.nome}" itemValue="#{p.idPROD}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Venda"></p:outputLabel>
+					<p:selectOneMenu id="venda" value="#{MBItem.itemVenda.idVenda}">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{MBItem.vendas}" var="v" itemLabel="#{v.dataPgto}" itemValue="#{v.idVENDA}" />
+					</p:selectOneMenu>
 					<p:outputLabel value="Quantidade"></p:outputLabel>
 					<p:inputText size="30" value="#{MBItem.itemVenda.qtde}"></p:inputText>
 					<p:outputLabel value="ValorUnitário"></p:outputLabel>
@@ -61,34 +78,48 @@
 					<p:outputLabel value="Observações"></p:outputLabel>
 					<p:inputText size="30" value="#{MBItem.itemVenda.obs}"></p:inputText>
 				</h:panelGrid>
-					<h:panelGrid columns="2">
-						<p:commandButton value="Gravar" actionListener="#{MBItem.novo}" oncomplete="PF('ItemNovo').hide();" update=":frmItemListagem:tblItens"></p:commandButton>
-						<p:commandButton value="Fechar" onclick="PF('ItemNovo').hide();"></p:commandButton>
-					</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Gravar" actionListener="#{MBItem.novo}"
+						oncomplete="PF('ItemNovo').hide();"
+						update=":frmItemListagem:tblItens"></p:commandButton>
+					<p:commandButton value="Fechar" onclick="PF('ItemNovo').hide();"></p:commandButton>
+				</h:panelGrid>
 			</h:form>
 		</p:dialog>
-	
-	<p:dialog widgetVar="ItemExcluir" closable="false" draggable="false" resizable="false" modal="true" appendTo="@(body)" header="Item - Excluir">
-		<h:form id="frmItemExcluir">
-			<h:panelGrid id="pnLItemExcluir" columns="2">
-				<h:outputText value="Código:"></h:outputText>
-				<h:outputText value="#{MBItem.itemVenda.idITEM_VENDA}"></h:outputText>
-				
-			</h:panelGrid>
-			<h:panelGrid>
-				<p:commandButton value="Confirmar" actionListener="#{MBItem.excluir}" oncomplete="PF('ItemExcluir').hide();" update=":frmItemListagem:tblItens"></p:commandButton>
-				<p:commandButton value="Cancelar" onclick="PF('ItemExcluir').hide();"></p:commandButton>
-			</h:panelGrid>
-		</h:form>
-	
-	</p:dialog>
 
-	<p:dialog widgetVar="ItemEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Item - Alterar">
-		<h:form id="frmItemEditar">
-			<h:panelGrid id="pnLItemEditar" columns="2">
-				<p:outputLabel value="Código:"></p:outputLabel>
-				<h:outputText value="#{MBItem.itemVenda.idITEM_VENDA}"></h:outputText>
-				<p:outputLabel value="Quantidade"></p:outputLabel>
+		<p:dialog widgetVar="ItemExcluir" closable="false" draggable="false"
+			resizable="false" modal="true" appendTo="@(body)"
+			header="Item - Excluir">
+			<h:form id="frmItemExcluir">
+				<h:panelGrid id="pnLItemExcluir" columns="2">
+					<h:outputText value="Código:"></h:outputText>
+					<h:outputText value="#{MBItem.itemVenda.idITEM_VENDA}"></h:outputText>
+
+				</h:panelGrid>
+				<h:panelGrid>
+					<p:commandButton value="Confirmar"
+						actionListener="#{MBItem.excluir}"
+						oncomplete="PF('ItemExcluir').hide();"
+						update=":frmItemListagem:tblItens"></p:commandButton>
+					<p:commandButton value="Cancelar"
+						onclick="PF('ItemExcluir').hide();"></p:commandButton>
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="ItemEditar" closable="false" draggable="false"
+			resizable="true" modal="true" appendTo="@(body)"
+			header="Item - Alterar">
+			<h:form id="frmItemEditar">
+				<h:panelGrid id="pnLItemEditar" columns="2">
+					<p:outputLabel value="Produto:"></p:outputLabel>
+					<h:outputText value="#{MBItem.itemVenda.nomeProduto}"></h:outputText>
+					<p:outputLabel value="Venda:"></p:outputLabel>
+					<h:outputText value="#{MBItem.itemVenda.dataPgto}"></h:outputText>
+					<p:outputLabel value="Código:"></p:outputLabel>
+					<h:outputText value="#{MBItem.itemVenda.idITEM_VENDA}"></h:outputText>
+					<p:outputLabel value="Quantidade"></p:outputLabel>
 					<p:inputText size="30" value="#{MBItem.itemVenda.qtde}"></p:inputText>
 					<p:outputLabel value="ValorUnitário"></p:outputLabel>
 					<p:inputText size="30" value="#{MBItem.itemVenda.valorUni}"></p:inputText>
@@ -96,15 +127,18 @@
 					<p:inputText size="30" value="#{MBItem.itemVenda.desconto}"></p:inputText>
 					<p:outputLabel value="Observações"></p:outputLabel>
 					<p:inputText size="30" value="#{MBItem.itemVenda.obs}"></p:inputText>
-			</h:panelGrid>
-				<h:panelGrid columns="2">
-					<p:commandButton value="Alterar" actionListener="#{MBItem.alterar}" oncomplete="PF('ItemEditar').hide();" update=":frmItemListagem:tblItens"></p:commandButton>
-					<p:commandButton value="Cancelar" onclick="PF('ItemEditar').hide();"></p:commandButton>
 				</h:panelGrid>
-		</h:form>
-		
-	</p:dialog>
-	
+				<h:panelGrid columns="2">
+					<p:commandButton value="Alterar" actionListener="#{MBItem.alterar}"
+						oncomplete="PF('ItemEditar').hide();"
+						update=":frmItemListagem:tblItens"></p:commandButton>
+					<p:commandButton value="Cancelar"
+						onclick="PF('ItemEditar').hide();"></p:commandButton>
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+
 	</ui:define>
-	
+
 </ui:composition>

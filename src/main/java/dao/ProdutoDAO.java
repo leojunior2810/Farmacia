@@ -110,6 +110,7 @@ public class ProdutoDAO extends BasicDAO {
 		while(rs.next()) {
 			Produto p = new Produto();
 			p.setIdPROD(rs.getInt("idPROD"));
+			p.setNome(rs.getString("Nome"));
 			p.setDataProd(rs.getDate("DataProd"));
 			p.setDescricao(rs.getString("Descricao"));
 			p.setQtde(rs.getInt("Qtde"));

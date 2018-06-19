@@ -7,8 +7,10 @@ public class ItemVenda {
 	private double valorUni;
 	private String desconto;
 	private String obs;
-	
-	
+	private int idProduto;
+	private int idVenda;
+	private String nomeProduto;
+	private String dataPgto;
 	
 	public int getIdITEM_VENDA() {
 		return idITEM_VENDA;
@@ -40,6 +42,31 @@ public class ItemVenda {
 	public void setObs(String obs) {
 		this.obs = obs;
 	}
+	public int getIdProduto() {
+		return idProduto;
+	}
+	public void setIdProduto(int idProduto) {
+		this.idProduto = idProduto;
+	}
+	public int getIdVenda() {
+		return idVenda;
+	}
+	public void setIdVenda(int idVenda) {
+		this.idVenda = idVenda;
+	}
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+	public String getDataPgto() {
+		return dataPgto;
+	}
+	public void setDataPgto(String dataPgto) {
+		this.dataPgto = dataPgto;
+	}
+
 
 
 	

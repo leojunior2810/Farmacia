@@ -20,8 +20,8 @@ public class ItemVendaDAO extends BasicDAO {
 
 			StringBuilder sql = new StringBuilder();
 			sql.append("INSERT INTO item_venda ");
-			sql.append("(Qtde,ValorUni,Desconto,Obs)");
-			sql.append("VALUES (?,?,?,?)");
+			sql.append("(Qtde,ValorUni,Desconto,Obs,VENDA_idVENDA,PRODUTO_idPROD)");
+			sql.append("VALUES (?,?,?,?,?,?)");
 
 			Connection conexao = ConexaoFactory.conectar();
 
@@ -30,7 +30,9 @@ public class ItemVendaDAO extends BasicDAO {
 			pst.setDouble(2, i.getValorUni());
 			pst.setString(3, i.getDesconto());
 			pst.setString(4, i.getObs());
-
+			pst.setInt(5, i.getIdVenda());
+			pst.setInt(6, i.getIdProduto());
+			
 			pst.executeUpdate();
 			pst.close();
 		}
@@ -87,9 +89,9 @@ public class ItemVendaDAO extends BasicDAO {
 
 	public ArrayList<ItemVenda> listar() throws SQLException{
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT * FROM ");
-		sql.append("item_venda ");
-		sql.append("ORDER BY nome ASC ");
+		sql.append("SELECT item_venda.*, produto.Nome as NomeProduto, venda.DataPgto as DataPgto ");
+		sql.append("FROM item_venda inner join produto on item_venda.PRODUTO_idPROD=produto.idPROD ");
+		sql.append(" inner join venda on item_venda.VENDA_idVENDA=venda.idVENDA");
 
 		Connection conexao = ConexaoFactory.conectar();
 
@@ -106,6 +108,8 @@ public class ItemVendaDAO extends BasicDAO {
 			i.setValorUni(rs.getDouble("ValorUni"));
 			i.setDesconto(rs.getString("Desconto"));
 			i.setObs(rs.getString("Obs"));
+			i.setNomeProduto(rs.getString("NomeProduto"));
+			i.setDataPgto(rs.getString("DataPgto"));
 
 			lista.add(i);
 		}
