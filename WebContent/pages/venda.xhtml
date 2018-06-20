@@ -14,51 +14,79 @@
 
 	<ui:define name="conteudo">
 		<h:form id="frmVenListagem">
-		<p:dataTable id="tblVendas" emptyMessage="Nenhum registro encontrado."
-									value="#{MBVenda.itens}"
-									var="item"
-									paginator="true"
-									rows="4">
-			<f:facet name="header">
+			<p:dataTable id="tblVendas"
+				emptyMessage="Nenhum registro encontrado." value="#{MBVenda.itens}"
+				var="item" paginator="true" rows="4">
+				<f:facet name="header">
 				Venda - Listagem
 			</f:facet>
-									
-			<p:column headerText="Código" sortBy="#{item.idVENDA}">
-				<h:outputText value="#{item.idVENDA}" />
-			</p:column>
-			<p:column headerText="DataVenda">
-				<h:outputText value="#{item.dataVenda}" />
-			</p:column>
-			<p:column headerText="DataVencimento">
-				<h:outputText value="#{item.dataVenc}" />
-			</p:column>
-			<p:column headerText="Observações">
-				<h:outputText value="#{item.obs}" />
-			</p:column>
-			<p:column headerText="IOF">
-				<h:outputText value="#{item.iof}" />
-			</p:column>
-			<p:column headerText="ICMS">
-				<h:outputText value="#{item.icms}" />
-			</p:column>
-			<p:column headerText="IPI">
-				<h:outputText value="#{item.ipi}" />
-			</p:column>
-			
-			<p:column headerText="Opções">
-				<p:commandButton icon="ui-icon-trash" actionListener="#{MBVenda.prepararExcluir}" oncomplete="PF('VenExcluir').show();" update=":frmVenExcluir:pnLVenExcluir" />
-				<p:commandButton icon="ui-icon-pencil" actionListener="#{MBVenda.prepararAlterar}" oncomplete="PF('VenEditar').show();" update=":frmVenEditar:pnLVenEditar"></p:commandButton>
-			</p:column>
-			
-			<f:facet name="footer">
-				<p:commandButton value="Novo" actionListener="#{MBVenda.prepararNovo}" oncomplete="PF('VenNovo').show();" update=":frmVenNovo:pnLVenNovo"></p:commandButton>
-			</f:facet>
-		</p:dataTable>
+
+				<p:column headerText="Código" sortBy="#{item.idVENDA}">
+					<h:outputText value="#{item.idVENDA}" />
+				</p:column>
+				<p:column headerText="DataVenda">
+					<h:outputText value="#{item.dataVenda}" />
+				</p:column>
+				<p:column headerText="DataVencimento">
+					<h:outputText value="#{item.dataVenc}" />
+				</p:column>
+				<p:column headerText="Observações">
+					<h:outputText value="#{item.obs}" />
+				</p:column>
+				<p:column headerText="IOF">
+					<h:outputText value="#{item.iof}" />
+				</p:column>
+				<p:column headerText="ICMS">
+					<h:outputText value="#{item.icms}" />
+				</p:column>
+				<p:column headerText="IPI">
+					<h:outputText value="#{item.ipi}" />
+				</p:column>
+
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{MBVenda.prepararExcluir}"
+						oncomplete="PF('VenExcluir').show();"
+						update=":frmVenExcluir:pnLVenExcluir" />
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{MBVenda.prepararAlterar}"
+						oncomplete="PF('VenEditar').show();"
+						update=":frmVenEditar:pnLVenEditar"></p:commandButton>
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton value="Novo"
+						actionListener="#{MBVenda.prepararNovo}"
+						oncomplete="PF('VenNovo').show();" update=":frmVenNovo:pnLVenNovo"></p:commandButton>
+				</f:facet>
+			</p:dataTable>
 		</h:form>
-		<p:dialog widgetVar="VenNovo" closeble="false" draggable="false" resizable="false" header="Nova Venda" modal="true" appendTo="@(body)">
+		<p:dialog widgetVar="VenNovo" closeble="false" draggable="false"
+			resizable="false" header="Nova Venda" modal="true" appendTo="@(body)">
 			<h:form id="frmVenNovo">
 				<h:panelGrid id="pnLVenNovo" columns="2">
-				<p:outputLabel value="DataVenda"></p:outputLabel>
+					<p:outputLabel value="Cliente"></p:outputLabel>
+					<p:selectOneMenu id="cliente" value="#{MBVenda.venda.idCliente}">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{MBVenda.clientes}" var="v"
+							itemLabel="#{v.nome}" itemValue="#{v.idCLIENTE}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="Funcionario"></p:outputLabel>
+					<p:selectOneMenu id="funcionario"
+						value="#{MBVenda.venda.idFuncionario}">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{MBVenda.funcionarios}" var="v"
+							itemLabel="#{v.nome}" itemValue="#{v.idFUNC}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="Pagamento"></p:outputLabel>
+					<p:selectOneMenu id="pagamento"
+						value="#{MBVenda.venda.idPagamento}">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{MBVenda.pagamentos}" var="p"
+							itemLabel="#{p.nome}" itemValue="#{p.idPAG}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="DataVenda"></p:outputLabel>
 					<p:calendar value="#{MBVenda.dataVenda}"></p:calendar>
 					<p:outputLabel value="DataVencimento"></p:outputLabel>
 					<p:inputText size="30" value="#{MBVenda.venda.dataVenc}"></p:inputText>
@@ -72,36 +100,52 @@
 					<p:inputText size="30" value="#{MBVenda.venda.icms}"></p:inputText>
 					<p:outputLabel value="IPI"></p:outputLabel>
 					<p:inputText size="30" value="#{MBVenda.venda.ipi}"></p:inputText>
-					
+
 				</h:panelGrid>
-					<h:panelGrid columns="2">
-						<p:commandButton value="Gravar" actionListener="#{MBVenda.novo}" oncomplete="PF('VenNovo').hide();" update=":frmVenListagem:tblVendas"></p:commandButton>
-						<p:commandButton value="Fechar" onclick="PF('VenNovo').hide();"></p:commandButton>
-					</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Gravar" actionListener="#{MBVenda.novo}"
+						oncomplete="PF('VenNovo').hide();"
+						update=":frmVenListagem:tblVendas"></p:commandButton>
+					<p:commandButton value="Fechar" onclick="PF('VenNovo').hide();"></p:commandButton>
+				</h:panelGrid>
 			</h:form>
 		</p:dialog>
-	
-	<p:dialog widgetVar="VenExcluir" closable="false" draggable="false" resizable="false" modal="true" appendTo="@(body)" header="Venda - Excluir">
-		<h:form id="frmVenExcluir">
-			<h:panelGrid id="pnLVenExcluir" columns="2">
-				<h:outputText value="Código:"></h:outputText>
-				<h:outputText value="#{MBVenda.venda.idVENDA}"></h:outputText>
-				
-			</h:panelGrid>
-			<h:panelGrid>
-				<p:commandButton value="Confirmar" actionListener="#{MBVenda.excluir}" oncomplete="PF('VenExcluir').hide();" update=":frmVenListagem:tblVendas"></p:commandButton>
-				<p:commandButton value="Cancelar" onclick="PF('VenExcluir').hide();"></p:commandButton>
-			</h:panelGrid>
-		</h:form>
-	
-	</p:dialog>
 
-	<p:dialog widgetVar="VenEditar" closable="false" draggable="false" resizable="true" modal="true" appendTo="@(body)" header="Venda - Alterar">
-		<h:form id="frmVenEditar">
-			<h:panelGrid id="pnLVenEditar" columns="2">
-				<p:outputLabel value="Código:"></p:outputLabel>
-				<h:outputText value="#{MBVenda.venda.idVENDA}"></h:outputText>
-				<p:outputLabel value="DataVenda"></p:outputLabel>
+		<p:dialog widgetVar="VenExcluir" closable="false" draggable="false"
+			resizable="false" modal="true" appendTo="@(body)"
+			header="Venda - Excluir">
+			<h:form id="frmVenExcluir">
+				<h:panelGrid id="pnLVenExcluir" columns="2">
+					<h:outputText value="Código:"></h:outputText>
+					<h:outputText value="#{MBVenda.venda.idVENDA}"></h:outputText>
+
+				</h:panelGrid>
+				<h:panelGrid>
+					<p:commandButton value="Confirmar"
+						actionListener="#{MBVenda.excluir}"
+						oncomplete="PF('VenExcluir').hide();"
+						update=":frmVenListagem:tblVendas"></p:commandButton>
+					<p:commandButton value="Cancelar"
+						onclick="PF('VenExcluir').hide();"></p:commandButton>
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog widgetVar="VenEditar" closable="false" draggable="false"
+			resizable="true" modal="true" appendTo="@(body)"
+			header="Venda - Alterar">
+			<h:form id="frmVenEditar">
+				<h:panelGrid id="pnLVenEditar" columns="2">
+					<p:outputLabel value="ClienteVenda:"></p:outputLabel>
+					<h:outputText value="#{MBVenda.venda.nomeCliente}"></h:outputText>
+					<p:outputLabel value="FuncionarioVenda:"></p:outputLabel>
+					<h:outputText value="#{MBVenda.venda.nomeFuncionario}"></h:outputText>
+					<p:outputLabel value="ValorTotalVenda:"></p:outputLabel>
+					<h:outputText value="#{MBVenda.venda.valorVenda}"></h:outputText>
+					<p:outputLabel value="Código:"></p:outputLabel>
+					<h:outputText value="#{MBVenda.venda.idVENDA}"></h:outputText>
+					<p:outputLabel value="DataVenda"></p:outputLabel>
 					<p:calendar size="30" value="#{MBVenda.dataVenda}"></p:calendar>
 					<p:outputLabel value="DataVencimento"></p:outputLabel>
 					<p:inputText size="30" value="#{MBVenda.venda.dataVenc}"></p:inputText>
@@ -115,15 +159,18 @@
 					<p:inputText size="30" value="#{MBVenda.venda.icms}"></p:inputText>
 					<p:outputLabel value="IPI"></p:outputLabel>
 					<p:inputText size="30" value="#{MBVenda.venda.ipi}"></p:inputText>
-			</h:panelGrid>
+				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Alterar" actionListener="#{MBVenda.alterar}" oncomplete="PF('VenEditar').hide();" update=":frmVenListagem:tblVendas"></p:commandButton>
+					<p:commandButton value="Alterar"
+						actionListener="#{MBVenda.alterar}"
+						oncomplete="PF('VenEditar').hide();"
+						update=":frmVenListagem:tblVendas"></p:commandButton>
 					<p:commandButton value="Cancelar" onclick="PF('VenEditar').hide();"></p:commandButton>
 				</h:panelGrid>
-		</h:form>
-		
-	</p:dialog>
-	
+			</h:form>
+
+		</p:dialog>
+
 	</ui:define>
-	
+
 </ui:composition>

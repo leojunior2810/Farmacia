@@ -9,14 +9,23 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
+import dao.ClienteDAO;
+import dao.FuncionarioDAO;
+import dao.PagamentoDAO;
 import dao.VendaDAO;
+import model.Cliente;
+import model.Funcionario;
+import model.Pagamento;
 import model.Venda;
 
 @ManagedBean(name = "MBVenda")
 @SessionScoped
 public class VendaBean extends BasicBean {
-
-	private Venda venda;
+	private ArrayList<Cliente> clientes;
+	private ArrayList<Funcionario> funcionarios;
+	private ArrayList<Pagamento> pagamentos;
+	private ArrayList<Pagamento> valorVenda;
+	private Venda venda = new Venda();
 	private ListDataModel<Venda> itens;
 	private Date dataVenda = new Date();
 
@@ -55,6 +64,14 @@ public class VendaBean extends BasicBean {
 		try {
 			VendaDAO dao = new VendaDAO();
 			ArrayList<Venda> lista = dao.listar();
+			ClienteDAO clientesDao = new ClienteDAO();
+			clientes = clientesDao.listar();
+			FuncionarioDAO funcionariosDao = new FuncionarioDAO();
+			funcionarios = funcionariosDao.listar();
+			PagamentoDAO pagamentosDao = new PagamentoDAO();
+			pagamentos = pagamentosDao.listar();
+			valorVenda = pagamentosDao.listar();
+			
 			itens = new ListDataModel<Venda>(lista);
 		}catch(SQLException ex) {
 			ex.printStackTrace();
@@ -113,6 +130,46 @@ public class VendaBean extends BasicBean {
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+
+	public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+
+
+	public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+
+	public ArrayList<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+
+	public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
+
+
+	public ArrayList<Pagamento> getPagamentos() {
+		return pagamentos;
+	}
+
+
+	public void setPagamentos(ArrayList<Pagamento> pagamentos) {
+		this.pagamentos = pagamentos;
+	}
+
+
+	public ArrayList<Pagamento> getValorVenda() {
+		return valorVenda;
+	}
+
+
+	public void setValorVenda(ArrayList<Pagamento> valorVenda) {
+		this.valorVenda = valorVenda;
 	}
 
 }

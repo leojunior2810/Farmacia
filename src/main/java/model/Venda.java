@@ -12,7 +12,13 @@ public class Venda {
 	private double iof;
 	private double icms;
 	private double ipi;
-	
+	private int idCliente;
+	private int idFuncionario;
+	private int idPagamento;
+	private double valorVenda;
+	private String nomeCliente;
+	private String nomeFuncionario;
+
 
 
 	public int getIdVENDA() {
@@ -86,6 +92,54 @@ public class Venda {
 		String saida = idVENDA + "-" + dataVenda + "-" + dataVenc + "-" + dataPgto + "-" + obs + "-" + iof + "-" +
 				icms + "-" + ipi;
 			return saida;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public int getIdFuncionario() {
+		return idFuncionario;
+	}
+
+	public void setIdFuncionario(int idFuncionario) {
+		this.idFuncionario = idFuncionario;
+	}
+
+	public int getIdPagamento() {
+		return idPagamento;
+	}
+
+	public void setIdPagamento(int idPagamento) {
+		this.idPagamento = idPagamento;
+	}
+
+	public double getValorVenda() {
+		return valorVenda;
+	}
+
+	public void setValorVenda(double valorVenda) {
+		this.valorVenda = valorVenda;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
+	}
+
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
 	}
 	
 	
