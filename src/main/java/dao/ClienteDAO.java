@@ -143,6 +143,7 @@ public class ClienteDAO extends BasicDAO {
 			c.setSexo(rs.getString("Sexo"));
 			c.setEmail(rs.getString("Email"));
 			c.setDtaCadastro(rs.getDate("DtaCadastro"));
+			c.setEstadoCivil(rs.getString("EstadoCivil"));
 			
 			lista.add(c);
 		}
